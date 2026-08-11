@@ -1,0 +1,37 @@
+---
+import { ORGANIZATIONAL_PAGES } from "../const";
+
+import Scaffold from "../layout/Scaffold.astro";
+import ContentHead from "../components/ContentHead.astro";
+
+import Thumb from "../assets/home/thumb.png";
+---
+
+<Scaffold>
+	<ContentHead
+		slot="head"
+		type="website"
+		title={ORGANIZATIONAL_PAGES.home.title}
+		description={ORGANIZATIONAL_PAGES.home.description}
+		thumb={{
+			resource: Thumb,
+			description: ORGANIZATIONAL_PAGES.home.thumb.description,
+		}}
+	/>
+	<div>
+		<h1>Em Construção!!!</h1>
+		<p>Em breve teremos algo divertido aqui!!!</p>
+	</div>
+</Scaffold>
+
+<style>
+	div {
+		width: 100vw;
+		height: 100vh;
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+</style>
