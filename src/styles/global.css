@@ -1,0 +1,42 @@
+:root {
+    color-scheme: light dark;
+
+    --bg-color: light-dark(#fff, #000);
+    --text-color: light-dark(#000, #fff);
+    --secundary-color: #47F66D;
+    --accent-color: #9347f6;
+
+    --nav-bar-size: 55px;
+    --menu-burguer-size: 250px;
+}
+
+body {
+    margin: 0;
+    font: normal 16px sans-serif;
+    color: var(--text-color);
+    background: var(--bg-color);
+}
+
+a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.full-bg {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 2;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+.bg-blur {
+    background: color-mix(in srgb, var(--bg-color) 70%, transparent);
+    backdrop-filter: blur(20px);
+}
+
+.hidden {
+    display: none;
+}
