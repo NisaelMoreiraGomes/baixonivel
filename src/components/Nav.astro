@@ -31,7 +31,9 @@ const pathname = Astro.url.pathname;
                     <a
                         href={link.page}
                         title={link.link_description}
-                        class:list={{ activated: pathname === link.page }}
+                        class:list={{
+                            activated: pathname.startsWith(link.page),
+                        }}
                     >
                         {link.content}
                     </a>
