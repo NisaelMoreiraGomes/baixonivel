@@ -1,24 +1,19 @@
 ---
-import { HOME_PAGE } from "../const";
+import { ORGANIZATIONAL_PAGES } from "../const";
 
 import Scaffold from "../layout/Scaffold.astro";
 import ContentHead from "../components/ContentHead.astro";
 
-import Thumb from "../assets/home/thumb.png";
+const PAGE = ORGANIZATIONAL_PAGES[0];
 ---
 
 <Scaffold>
-	<ContentHead
-		slot="head"
-		type="website"
-		title={HOME_PAGE.title}
-		description={HOME_PAGE.description}
-		thumb={{
-			resource: Thumb,
-			description: HOME_PAGE.thumb?.description || "",
-		}}
-	/>
-
+    <ContentHead
+        slot="head"
+        type="website"
+        title={PAGE.title}
+        description={PAGE.description}
+    />
 	<div>Em breve teremos algo bacana por aqui!!!</div>
 </Scaffold>
 
