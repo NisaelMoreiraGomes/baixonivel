@@ -1,0 +1,101 @@
+<div class="search hidden">
+    <div class="searchBox">
+        <div class="bar">
+            <span>Pesquise com o Google</span>
+            <button class="closeSearch">X</button>
+        </div>
+        <script
+            async
+            src={"https://cse.google.com/cse.js?cx=" +
+                import.meta.env.GOOGLE_SEARCH_ID}></script>
+        <div class="gcse-search"></div>
+    </div>
+</div>
+
+<script>
+    const inputSearch = document.querySelector(".search");
+
+    inputSearch?.addEventListener("animationend", (e: Event) => {
+        const animName = (e as AnimationEvent).animationName;
+
+        inputSearch.classList.remove(animName);
+
+        if (animName === "desappear-top") {
+            inputSearch.classList.add("hidden");
+        }
+    });
+
+    document.addEventListener("openInputSearch", () => {
+        inputSearch?.classList.remove("hidden");
+        inputSearch?.classList.add("appear-top");
+    });
+
+    document
+        .querySelector(".closeSearch")
+        ?.addEventListener("click", () =>
+            inputSearch?.classList.add("desappear-top"),
+        );
+</script>
+
+<style>
+    .search {
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        position: fixed;
+        z-index: 3;
+        top: 20px;
+    }
+
+    .searchBox {
+        width: 700px;
+        padding: 10px;
+        background: #fff;
+        color: #000;
+        border: 1px solid #ccc;
+    }
+
+    .bar {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    button {
+        border: none;
+        background: #ccc;
+        color: #000;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: background 0.3s ease-in-out;
+    }
+
+    button:hover {
+        background: red;
+    }
+
+    .appear-top {
+        animation: appear-top 0.3s;
+    }
+
+    .desappear-top {
+        animation: desappear-top 0.3s;
+    }
+
+    @keyframes appear-top {
+        from {
+            top: -135px;
+        }
+        to {
+            top: 20px;
+        }
+    }
+
+    @keyframes desappear-top {
+        from {
+            top: 20px;
+        }
+        to {
+            top: -135px;
+        }
+    }
+</style>
