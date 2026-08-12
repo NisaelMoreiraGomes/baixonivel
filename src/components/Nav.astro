@@ -1,0 +1,138 @@
+---
+import { SITE_CONFIG } from "../const";
+
+import { HOME_PAGE } from "../const";
+import { ORGANIZATIONAL_PAGES } from "../const";
+
+import MenuBurguer from "./MenuBurguer.astro";
+import Search from "./Search.astro";
+
+const pathname = Astro.url.pathname;
+---
+
+<nav>
+    <div class="navbar bg-blur">
+        <div class="start">
+            <button
+                class="openBurguer"
+                title="Abra a gaveta para ver as categorias e muito mais."
+                >≡</button
+            >
+            <a
+                class:list={{ activated: pathname === HOME_PAGE.page }}
+                class="logo"
+                href={HOME_PAGE.page}
+                title={HOME_PAGE.link_description}>{SITE_CONFIG.name}</a
+            >
+        </div>
+        <div class="end">
+            {
+                ORGANIZATIONAL_PAGES.map((link) => (
+                    <a
+                        href={link.page}
+                        title={link.link_description}
+                        class:list={{ activated: pathname === link.page }}
+                    >
+                        {link.content}
+                    </a>
+                ))
+            }
+
+            <button
+                class="openSearch"
+                title="Busca personalizada pelo mecanismo do Google.">🔎</button
+            >
+        </div>
+    </div>
+
+    <MenuBurguer />
+    <Search />
+</nav>
+
+<script>
+    document
+        .querySelector(".openBurguer")
+        ?.addEventListener("click", () =>
+            document.dispatchEvent(new CustomEvent("openBurguer")),
+        );
+
+    document
+        .querySelector(".openSearch")
+        ?.addEventListener("click", () =>
+            document.dispatchEvent(new CustomEvent("openInputSearch")),
+        );
+</script>
+
+<style>
+    nav {
+        margin-bottom: var(--nav-bar-size);
+    }
+
+    button {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+    }
+
+    a {
+        display: inline-block;
+        padding: 10px;
+    }
+
+    a,
+    button {
+        border-bottom: 2px solid var(--bg-color);
+        transition:
+            color 0.3s ease-out,
+            border 1s ease-in-out;
+    }
+
+    a:hover,
+    button:hover {
+        color: var(--secundary-color);
+        border-bottom: 2px dotted var(--secundary-color);
+    }
+
+    .navbar {
+        position: fixed;
+        top: 0px;
+        z-index: 1;
+
+        width: 100vw;
+        height: var(--nav-bar-size);
+    }
+
+    .navbar,
+    .start,
+    .end {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .logo {
+        font-size: 1.4rem;
+    }
+
+    .activated {
+        border-color: var(--secundary-color);
+    }
+    .activated:hover {
+        color: var(--accent-color);
+        border-color: var(--accent-color);
+    }
+
+    @media (max-width: 430px) {
+        .navbar {
+            justify-content: space-between;
+            padding: 0px 10px;
+            box-sizing: border-box;
+        }
+    }
+
+    @media (max-width: 649px) {
+        .end a {
+            display: none;
+        }
+    }
+</style>

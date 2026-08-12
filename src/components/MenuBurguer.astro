@@ -1,0 +1,142 @@
+---
+import Logo from "../../public/favicon.svg";
+import type { Link } from "../const";
+
+interface Props {
+    links?: Link[];
+}
+
+const { links = [] } = Astro.props;
+
+import { ORGANIZATIONAL_PAGES } from "../const";
+---
+
+<div class="menu-burguer hidden bg-blur">
+    <div class="cover">
+        <Logo width="150" />
+    </div>
+    <div>
+        {
+            links.map((link) => (
+                <a href={link.page} title={link.link_description}>
+                    {link.content}
+                </a>
+            ))
+        }
+    </div>
+    <div class="about-links">
+        {
+            ORGANIZATIONAL_PAGES.map((link) => (
+                <a href={link.page} title={link.link_description}>
+                    {link.content}
+                </a>
+            ))
+        }
+    </div>
+</div>
+
+<script>
+    const menu = document.querySelector(".menu-burguer");
+    const background = document.querySelector(".full-bg");
+
+    menu?.addEventListener("animationend", (e: Event) => {
+        const animName = (e as AnimationEvent).animationName;
+
+        menu.classList.remove(animName);
+
+        if (animName === "desappear-left") {
+            menu.classList.add("hidden");
+        }
+    });
+
+    function open() {
+        menu?.classList.remove("hidden");
+        background?.classList.remove("hidden");
+
+        menu?.classList.add("appear-left");
+    }
+
+    function close() {
+        menu?.classList.add("desappear-left");
+        background?.classList.add("hidden");
+    }
+
+    document.addEventListener("openBurguer", () => open());
+
+    background?.addEventListener("click", () => close());
+</script>
+
+<style>
+    .menu-burguer {
+        text-align: center;
+
+        position: fixed;
+        top: 0px;
+        z-index: 3;
+
+        width: var(--menu-burguer-size);
+        height: 100vh;
+
+        overflow-y: scroll;
+
+        box-shadow: 0 0 7px rgba(200, 200, 200, 0.4);
+    }
+
+    .menu-burguer .cover {
+        padding: 10px 0px;
+    }
+
+    a {
+        display: block;
+        vertical-align: middle;
+        text-align: left;
+
+        padding: 15px;
+
+        transition:
+            color 1s ease-out,
+            background 0.5s ease-in-out;
+    }
+
+    a:hover {
+        background: color-mix(in srgb, var(--secundary-color) 70%, transparent);
+    }
+
+    .appear-left {
+        animation: appear-left 0.3s;
+    }
+
+    .desappear-left {
+        animation: desappear-left 0.3s;
+    }
+
+    .about-links {
+        display: none;
+
+        border-top: 2px dashed var(--secundary-color);
+    }
+
+    @keyframes appear-left {
+        from {
+            left: calc(var(--menu-burguer-size) * -1);
+        }
+        to {
+            left: 0px;
+        }
+    }
+
+    @keyframes desappear-left {
+        from {
+            left: 0px;
+        }
+        to {
+            left: calc(var(--menu-burguer-size) * -1);
+        }
+    }
+
+    @media (max-width: 649px) {
+        .about-links {
+            display: block;
+        }
+    }
+</style>
