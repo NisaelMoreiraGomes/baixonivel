@@ -36,6 +36,8 @@ import { ORGANIZATIONAL_PAGES } from "../const";
     const acceptAnalitycs = document.querySelector(".acA") as HTMLInputElement;
     const acceptSearch = document.querySelector(".acS") as HTMLInputElement;
 
+    const emitted = { analitycs: false, search: false };
+
     function get_status() {
         return {
             search: localStorage.getItem("accept-search-cookies") === "y",
@@ -63,10 +65,15 @@ import { ORGANIZATIONAL_PAGES } from "../const";
 
         const { analitycs, search } = get_status();
 
-        analitycs &&
+        if (analitycs && !emitted.analitycs) {
             document.dispatchEvent(new CustomEvent("analyticsCookiePermitted"));
-        search &&
+            emitted.analitycs = true;
+        }
+
+        if (search && !emitted.search) {
             document.dispatchEvent(new CustomEvent("searchCookiePermitted"));
+            emitted.search = true;
+        }
     });
 
     document.querySelector(".close-cookies")?.addEventListener("click", () => {
