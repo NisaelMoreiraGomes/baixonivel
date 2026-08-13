@@ -26,6 +26,11 @@ button {
     cursor: pointer;
 }
 
+button.disable {
+    text-decoration: line-through;
+    opacity: 0.3;
+}
+
 .full-bg {
     position: fixed;
     top: 0px;

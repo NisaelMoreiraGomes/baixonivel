@@ -41,7 +41,7 @@ const pathname = Astro.url.pathname;
             }
 
             <button
-                class="openSearch"
+                class="openSearch disable"
                 title="Busca personalizada pelo mecanismo do Google.">🔎</button
             >
         </div>
@@ -52,17 +52,31 @@ const pathname = Astro.url.pathname;
 </nav>
 
 <script>
+    const searchButton = document.querySelector(
+        ".openSearch",
+    ) as HTMLButtonElement;
+
     document
         .querySelector(".openBurguer")
         ?.addEventListener("click", () =>
             document.dispatchEvent(new CustomEvent("openBurguer")),
         );
 
-    document
-        .querySelector(".openSearch")
-        ?.addEventListener("click", () =>
-            document.dispatchEvent(new CustomEvent("openInputSearch")),
-        );
+    searchButton.addEventListener("click", () => {
+        if (searchButton.classList.contains("disable")) {
+            alert(
+                "Para realizar buscas, é preciso haver o consentimento do uso de cookies de terceiros.",
+            );
+            document.dispatchEvent(new CustomEvent("showCookieCard"));
+            return;
+        }
+
+        document.dispatchEvent(new CustomEvent("openInputSearch"));
+    });
+
+    document.addEventListener("searchCookiePermitted", function () {
+        searchButton.classList.remove("disable");
+    });
 </script>
 
 <style>

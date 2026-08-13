@@ -1,0 +1,138 @@
+---
+import { ORGANIZATIONAL_PAGES } from "../const";
+---
+
+<div class="cookie hidden">
+    <div class="cookie-card">
+        <span
+            >Esse site usa cookies de terceiros para algumas funcionalidades.
+            Você pode conferir nossa <a
+                href={ORGANIZATIONAL_PAGES[2].page}
+                title={ORGANIZATIONAL_PAGES[2].link_description}
+                >política de privacidade</a
+            > para mais informações. Deixe marcado caso você aceite permitir:</span
+        >
+
+        <div>
+            <label>
+                <input type="checkbox" checked class="acS" /> Cookies para usar a
+                barra de pesquisa do Google.
+            </label>
+
+            <label>
+                <input type="checkbox" checked class="acA" /> Cookies do Google Analytics.
+            </label>
+            <label>
+                <button class="close-cookies">Fechar</button>
+            </label>
+        </div>
+    </div>
+</div>
+
+<script>
+    const hiddenCookie = localStorage.getItem("hidden-cookie");
+    const cookieCard = document.querySelector(".cookie");
+
+    const acceptAnalitycs = document.querySelector(".acA") as HTMLInputElement;
+    const acceptSearch = document.querySelector(".acS") as HTMLInputElement;
+
+    function get_status() {
+        return {
+            search: localStorage.getItem("accept-search-cookies") === "y",
+            analitycs: localStorage.getItem("accept-analitycs-cookies") === "y",
+        };
+    }
+
+    function set_status(analitycs: string, search: string) {
+        localStorage.setItem("accept-analitycs-cookies", analitycs);
+        localStorage.setItem("accept-search-cookies", search);
+    }
+
+    document.addEventListener("showCookieCard", function () {
+        if (hiddenCookie === "y") {
+            const { analitycs, search } = get_status();
+            acceptAnalitycs.checked = analitycs;
+            acceptSearch.checked = search;
+        }
+
+        cookieCard?.classList.remove("hidden");
+    });
+
+    document.addEventListener("hiddenCookieCard", function () {
+        cookieCard?.classList.add("hidden");
+
+        const { analitycs, search } = get_status();
+
+        analitycs &&
+            document.dispatchEvent(new CustomEvent("analyticsCookiePermitted"));
+        search &&
+            document.dispatchEvent(new CustomEvent("searchCookiePermitted"));
+    });
+
+    document.querySelector(".close-cookies")?.addEventListener("click", () => {
+        set_status(
+            acceptAnalitycs.checked ? "y" : "n",
+            acceptSearch.checked ? "y" : "n",
+        );
+
+        document.dispatchEvent(new CustomEvent("hiddenCookieCard"));
+
+        localStorage.setItem("hidden-cookie", "y");
+    });
+
+    if (hiddenCookie !== "y") {
+        document.dispatchEvent(new CustomEvent("showCookieCard"));
+    } else {
+        document.dispatchEvent(new CustomEvent("hiddenCookieCard"));
+    }
+</script>
+
+<style>
+    .cookie {
+        width: 100vw;
+        position: fixed;
+        bottom: 40px;
+        left: 0px;
+        display: flex;
+        justify-content: center;
+    }
+    .cookie-card {
+        padding: 15px;
+        width: 600px;
+        border: 1px solid #555;
+        border-radius: 5px;
+        text-align: justify;
+        font-size: 0.9rem;
+        background: var(--bg-color);
+    }
+
+    label {
+        display: block;
+        padding: 5px 10px;
+    }
+
+    label:first-of-type,
+    label:last-of-type {
+        margin-top: 10px;
+    }
+
+    label:last-of-type {
+        text-align: center;
+    }
+
+    a {
+        text-decoration: underline;
+        transition: 0.3s color;
+    }
+
+    a:hover {
+        color: var(--secundary-color);
+    }
+
+    @media (max-width: 650px) {
+        .cookie-card {
+            width: 95vw;
+            box-sizing: border-box;
+        }
+    }
+</style>

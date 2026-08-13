@@ -5,8 +5,9 @@
             <button class="closeSearch">X</button>
         </div>
         <script
-            async
-            src={"https://cse.google.com/cse.js?cx=" +
+            id="google-search-script"
+            type="text/javascript-lazy"
+            data-src={"https://cse.google.com/cse.js?cx=" +
                 import.meta.env.GOOGLE_SEARCH_ID}></script>
         <div class="gcse-search"></div>
     </div>
@@ -14,6 +15,22 @@
 
 <script>
     const inputSearch = document.querySelector(".search");
+
+    const googleScript = document.querySelector(
+        "#google-search-script",
+    ) as HTMLScriptElement;
+
+    document.addEventListener("searchCookiePermitted", function () {
+        if (googleScript && googleScript.dataset.src) {
+            const newScript = document.createElement("script");
+            newScript.src = googleScript.dataset.src;
+            newScript.type = "text/javascript";
+
+            document.body.appendChild(newScript);
+
+            googleScript.remove();
+        }
+    });
 
     inputSearch?.addEventListener("animationend", (e: Event) => {
         const animName = (e as AnimationEvent).animationName;
