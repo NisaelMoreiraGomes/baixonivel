@@ -22,6 +22,15 @@ import { ORGANIZATIONAL_PAGES } from "../const";
             <label>
                 <input type="checkbox" checked class="acA" /> Cookies do Google Analytics.
             </label>
+
+            <label>
+                <input type="checkbox" checked class="acAds" /> Cookies do Google
+                Adsense.
+            </label>
+            <label>
+                Caso você não permita Cookies do Google Adsense, os anúncios
+                seram exibidos no modo estrito.
+            </label>
             <label>
                 <button class="close-cookies">Fechar</button>
             </label>
@@ -30,67 +39,47 @@ import { ORGANIZATIONAL_PAGES } from "../const";
 </div>
 
 <script>
-    const hiddenCookie = localStorage.getItem("hidden-cookie");
-    const cookieCard = document.querySelector(".cookie");
+    import Cookies from "../scripts/cookies";
+    import CookieCard from "../scripts/cookieCard";
 
-    const acceptAnalitycs = document.querySelector(".acA") as HTMLInputElement;
-    const acceptSearch = document.querySelector(".acS") as HTMLInputElement;
+    const cookies = new Cookies();
 
-    const emitted = { analitycs: false, search: false };
+    const cookiesCard = document.querySelector(".cookie");
+    const adsInput = document.querySelector(".acAds") as HTMLInputElement;
+    const analitycsInput = document.querySelector(".acA") as HTMLInputElement;
+    const searchInput = document.querySelector(".acS") as HTMLInputElement;
+    const closeCookies = document.querySelector(".close-cookies");
 
-    function get_status() {
-        return {
-            search: localStorage.getItem("accept-search-cookies") === "y",
-            analitycs: localStorage.getItem("accept-analitycs-cookies") === "y",
-        };
+    function load_inputs_state() {
+        const { ads, analitycs, search } = cookies.get_status();
+
+        adsInput.checked = ads;
+        analitycsInput.checked = analitycs;
+        searchInput.checked = search;
     }
 
-    function set_status(analitycs: string, search: string) {
-        localStorage.setItem("accept-analitycs-cookies", analitycs);
-        localStorage.setItem("accept-search-cookies", search);
-    }
-
-    document.addEventListener("showCookieCard", function () {
-        if (hiddenCookie === "y") {
-            const { analitycs, search } = get_status();
-            acceptAnalitycs.checked = analitycs;
-            acceptSearch.checked = search;
-        }
-
-        cookieCard?.classList.remove("hidden");
+    CookieCard.onOpen(() => {
+        console.log("evento abrir");
+        load_inputs_state();
+        cookiesCard?.classList.remove("hidden");
     });
 
-    document.addEventListener("hiddenCookieCard", function () {
-        cookieCard?.classList.add("hidden");
-
-        const { analitycs, search } = get_status();
-
-        if (analitycs && !emitted.analitycs) {
-            document.dispatchEvent(new CustomEvent("analyticsCookiePermitted"));
-            emitted.analitycs = true;
-        }
-
-        if (search && !emitted.search) {
-            document.dispatchEvent(new CustomEvent("searchCookiePermitted"));
-            emitted.search = true;
-        }
+    CookieCard.onClose(() => {
+        cookiesCard?.classList.add("hidden");
     });
 
-    document.querySelector(".close-cookies")?.addEventListener("click", () => {
-        set_status(
-            acceptAnalitycs.checked ? "y" : "n",
-            acceptSearch.checked ? "y" : "n",
+    closeCookies?.addEventListener("click", () => {
+        cookies.set_and_emit_status(
+            adsInput.checked,
+            analitycsInput.checked,
+            searchInput.checked,
         );
 
-        document.dispatchEvent(new CustomEvent("hiddenCookieCard"));
-
-        localStorage.setItem("hidden-cookie", "y");
+        CookieCard.close();
     });
 
-    if (hiddenCookie !== "y") {
-        document.dispatchEvent(new CustomEvent("showCookieCard"));
-    } else {
-        document.dispatchEvent(new CustomEvent("hiddenCookieCard"));
+    if (!cookies.get_hidden_card()) {
+        CookieCard.open();
     }
 </script>
 

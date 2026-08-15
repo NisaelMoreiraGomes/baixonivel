@@ -1,0 +1,1 @@
+export const eventEmmit = (name: string) => document.dispatchEvent(new CustomEvent(name))
