@@ -2,7 +2,10 @@
 import { ORGANIZATIONAL_PAGES } from "../const";
 ---
 
-<div class="cookie hidden">
+<div
+    class="cookie hidden"
+    data-version={import.meta.env.EXPECTED_COOKIE_VERSION}
+>
     <div class="cookie-card">
         <span
             >Esse site usa cookies de terceiros para algumas funcionalidades.
@@ -42,13 +45,13 @@ import { ORGANIZATIONAL_PAGES } from "../const";
     import Cookies from "../scripts/cookies";
     import CookieCard from "../scripts/cookieCard";
 
-    const cookies = new Cookies();
-
-    const cookiesCard = document.querySelector(".cookie");
+    const cookiesCard = document.querySelector(".cookie") as HTMLDivElement;
     const adsInput = document.querySelector(".acAds") as HTMLInputElement;
     const analitycsInput = document.querySelector(".acA") as HTMLInputElement;
     const searchInput = document.querySelector(".acS") as HTMLInputElement;
     const closeCookies = document.querySelector(".close-cookies");
+
+    const cookies = new Cookies(cookiesCard.dataset.version ?? "1.0");
 
     function load_inputs_state() {
         const { ads, analitycs, search } = cookies.get_status();
@@ -58,9 +61,10 @@ import { ORGANIZATIONAL_PAGES } from "../const";
         searchInput.checked = search;
     }
 
-    CookieCard.onOpen(() => {
-        console.log("evento abrir");
-        load_inputs_state();
+    CookieCard.onOpen((event) => {
+        if (event.detail.loadState) {
+            load_inputs_state();
+        }
         cookiesCard?.classList.remove("hidden");
     });
 
@@ -69,17 +73,19 @@ import { ORGANIZATIONAL_PAGES } from "../const";
     });
 
     closeCookies?.addEventListener("click", () => {
-        cookies.set_and_emit_status(
-            adsInput.checked,
-            analitycsInput.checked,
-            searchInput.checked,
-        );
+        cookies.set_and_emit_status({
+            ads: adsInput.checked,
+            analitycs: analitycsInput.checked,
+            search: searchInput.checked,
+        });
 
         CookieCard.close();
     });
 
     if (!cookies.get_hidden_card()) {
-        CookieCard.open();
+        CookieCard.open(false);
+    } else {
+        cookies.emit_status(cookies.get_status());
     }
 </script>
 

@@ -1,4 +1,4 @@
-import { eventEmmit } from "./utils"
+import { eventEmmit } from "./event"
 
 const searchCookieEventName = "searchCookiePermitted"
 const analyticsCookieEventName = "analyticsCookiePermitted"
@@ -7,26 +7,38 @@ const adsCookieEventName = "adsCookiePermitted"
 const adsCookieStorage = "accept-ads-cookies"
 const analitycsCookieStorage = "accept-analitycs-cookies"
 const searchCookieStorage = "accept-search-cookies"
-const hiddenCardCookieStorage = "hidden-cookie-card"
+const hiddenCardCookieStorage = "cookies-version"
 
 const stringAccept = (value: boolean) => value ? "y" : "n"
 
+type CookiesStatus = {
+    ads: boolean;
+    analitycs: boolean;
+    search: boolean;
+}
+
 export default class Cookies {
-    private emitted = {
+    private emitted: CookiesStatus = {
         ads: false,
         analitycs: false,
         search: false
     }
 
+    private expectedVersion: string
+
+    constructor(expectedVersion: string) {
+        this.expectedVersion = expectedVersion
+    }
+
     set_hidden_card() {
-        localStorage.setItem(hiddenCardCookieStorage, "y")
+        localStorage.setItem(hiddenCardCookieStorage, this.expectedVersion)
     }
 
     get_hidden_card() {
-        return localStorage.getItem(hiddenCardCookieStorage) === "y"
+        return localStorage.getItem(hiddenCardCookieStorage) === this.expectedVersion
     }
 
-    get_status() {
+    get_status(): CookiesStatus {
         return {
             ads: localStorage.getItem(adsCookieStorage) === "y",
             analitycs: localStorage.getItem(analitycsCookieStorage) === "y",
@@ -34,31 +46,31 @@ export default class Cookies {
         }
     }
 
-    set_and_emit_status(ads: boolean, analitycs: boolean, search: boolean) {
-        this.set_status(ads, analitycs, search)
-        this.emit_status(ads, analitycs, search)
+    set_and_emit_status(status: CookiesStatus) {
+        this.set_status(status)
+        this.emit_status(status)
     }
 
-    set_status(ads: boolean, analitycs: boolean, search: boolean) {
-        localStorage.setItem(adsCookieStorage, stringAccept(ads))
-        localStorage.setItem(analitycsCookieStorage, stringAccept(analitycs))
-        localStorage.setItem(searchCookieStorage, stringAccept(search))
+    set_status(status: CookiesStatus) {
+        localStorage.setItem(adsCookieStorage, stringAccept(status.ads))
+        localStorage.setItem(analitycsCookieStorage, stringAccept(status.analitycs))
+        localStorage.setItem(searchCookieStorage, stringAccept(status.search))
 
         this.set_hidden_card()
     }
 
-    emit_status(ads: boolean, analitycs: boolean, search: boolean) {
-        if (ads && !this.emitted.ads) {
+    emit_status(status: CookiesStatus) {
+        if (status.ads && !this.emitted.ads) {
             this.emitted.ads = true
             eventEmmit(adsCookieEventName)
         }
 
-        if (analitycs && !this.emitted.analitycs) {
+        if (status.analitycs && !this.emitted.analitycs) {
             this.emitted.analitycs = true
             eventEmmit(analyticsCookieEventName)
         }
 
-        if (search && !this.emitted.search) {
+        if (status.search && !this.emitted.search) {
             this.emitted.search = true
             eventEmmit(searchCookieEventName)
         }

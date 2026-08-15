@@ -1,19 +1,23 @@
-import { eventEmmit } from "./utils"
+import { eventEmmit } from "./event"
 
-const openCardEventName = "openCard"
-const closeCardEventName = "closeCard"
+type OpenCardEvent = CustomEvent<{
+    loadState: boolean
+}>
+
+const openCardEventName = "openCookieCard"
+const closeCardEventName = "closeCookieCard"
 
 export default class CookieCard {
-    static open() {
-        eventEmmit(openCardEventName)
+    static open(loadState = true) {
+        eventEmmit(openCardEventName, { loadState })
     }
 
     static close() {
         eventEmmit(closeCardEventName)
     }
 
-    static onOpen(action: () => void) {
-        document.addEventListener(openCardEventName, action)
+    static onOpen(action: (event: OpenCardEvent) => void) {
+        document.addEventListener(openCardEventName, action as EventListener)
     }
 
     static onClose(action: () => void) {

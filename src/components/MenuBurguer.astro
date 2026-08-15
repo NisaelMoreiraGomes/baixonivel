@@ -36,6 +36,8 @@ import { ORGANIZATIONAL_PAGES } from "../const";
 </div>
 
 <script>
+    import MenuBurguer from "../scripts/menuBurguer";
+
     const menu = document.querySelector(".menu-burguer");
     const background = document.querySelector(".full-bg");
 
@@ -61,9 +63,10 @@ import { ORGANIZATIONAL_PAGES } from "../const";
         background?.classList.add("hidden");
     }
 
-    document.addEventListener("openBurguer", () => open());
+    MenuBurguer.onOpen(open);
+    MenuBurguer.onClose(close);
 
-    background?.addEventListener("click", () => close());
+    background?.addEventListener("click", MenuBurguer.close);
 </script>
 
 <style>
@@ -102,36 +105,10 @@ import { ORGANIZATIONAL_PAGES } from "../const";
         background: color-mix(in srgb, var(--secundary-color) 70%, transparent);
     }
 
-    .appear-left {
-        animation: appear-left 0.3s;
-    }
-
-    .desappear-left {
-        animation: desappear-left 0.3s;
-    }
-
     .about-links {
         display: none;
 
         border-top: 2px dashed var(--secundary-color);
-    }
-
-    @keyframes appear-left {
-        from {
-            left: calc(var(--menu-burguer-size) * -1);
-        }
-        to {
-            left: 0px;
-        }
-    }
-
-    @keyframes desappear-left {
-        from {
-            left: 0px;
-        }
-        to {
-            left: calc(var(--menu-burguer-size) * -1);
-        }
     }
 
     @media (max-width: 649px) {

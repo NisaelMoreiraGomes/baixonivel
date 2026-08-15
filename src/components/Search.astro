@@ -14,13 +14,24 @@
 </div>
 
 <script>
+    import Search from "../scripts/search";
+    import Cookies from "../scripts/cookies";
+
     const inputSearch = document.querySelector(".search");
+    const closeSearch = document.querySelector(".closeSearch");
 
     const googleScript = document.querySelector(
         "#google-search-script",
     ) as HTMLScriptElement;
 
-    document.addEventListener("searchCookiePermitted", function () {
+    Search.onOpen(() => {
+        inputSearch?.classList.remove("hidden");
+        inputSearch?.classList.add("appear-top");
+    });
+
+    Search.onClose(() => inputSearch?.classList.add("desappear-top"));
+
+    Cookies.onSearchPermitted(() => {
         if (googleScript && googleScript.dataset.src) {
             const newScript = document.createElement("script");
             newScript.src = googleScript.dataset.src;
@@ -42,16 +53,7 @@
         }
     });
 
-    document.addEventListener("openInputSearch", () => {
-        inputSearch?.classList.remove("hidden");
-        inputSearch?.classList.add("appear-top");
-    });
-
-    document
-        .querySelector(".closeSearch")
-        ?.addEventListener("click", () =>
-            inputSearch?.classList.add("desappear-top"),
-        );
+    closeSearch?.addEventListener("click", () => Search.close());
 </script>
 
 <style>
@@ -88,31 +90,5 @@
 
     button:hover {
         background: red;
-    }
-
-    .appear-top {
-        animation: appear-top 0.3s;
-    }
-
-    .desappear-top {
-        animation: desappear-top 0.3s;
-    }
-
-    @keyframes appear-top {
-        from {
-            top: -135px;
-        }
-        to {
-            top: 20px;
-        }
-    }
-
-    @keyframes desappear-top {
-        from {
-            top: 20px;
-        }
-        to {
-            top: -135px;
-        }
     }
 </style>

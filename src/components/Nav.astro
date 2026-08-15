@@ -52,31 +52,33 @@ const pathname = Astro.url.pathname;
 </nav>
 
 <script>
+    import Cookies from "../scripts/cookies";
+    import CookieCard from "../scripts/cookieCard";
+
+    import MenuBurguer from "../scripts/menuBurguer";
+    import Search from "../scripts/search";
+
     const searchButton = document.querySelector(
         ".openSearch",
     ) as HTMLButtonElement;
 
     document
         .querySelector(".openBurguer")
-        ?.addEventListener("click", () =>
-            document.dispatchEvent(new CustomEvent("openBurguer")),
-        );
+        ?.addEventListener("click", () => MenuBurguer.open());
 
     searchButton.addEventListener("click", () => {
         if (searchButton.classList.contains("disable")) {
             alert(
                 "Para realizar buscas, é preciso haver o consentimento do uso de cookies de terceiros.",
             );
-            document.dispatchEvent(new CustomEvent("showCookieCard"));
+            CookieCard.open();
             return;
         }
 
-        document.dispatchEvent(new CustomEvent("openInputSearch"));
+        Search.open();
     });
 
-    document.addEventListener("searchCookiePermitted", function () {
-        searchButton.classList.remove("disable");
-    });
+    Cookies.onSearchPermitted(() => searchButton.classList.remove("disable"));
 </script>
 
 <style>
