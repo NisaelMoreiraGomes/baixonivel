@@ -37,34 +37,20 @@ import { ORGANIZATIONAL_PAGES } from "../const";
 
 <script>
     import MenuBurguer from "../scripts/menuBurguer";
+    import { animation } from "../scripts/animation";
 
     const menu = document.querySelector(".menu-burguer");
     const background = document.querySelector(".full-bg");
 
-    menu?.addEventListener("animationend", (e: Event) => {
-        const animName = (e as AnimationEvent).animationName;
-
-        menu.classList.remove(animName);
-
-        if (animName === "desappear-left") {
-            menu.classList.add("hidden");
-        }
+    MenuBurguer.onOpen(() => {
+        animation.start("appear-left", menu);
+        background?.classList.remove("hidden");
     });
 
-    function open() {
-        menu?.classList.remove("hidden");
-        background?.classList.remove("hidden");
-
-        menu?.classList.add("appear-left");
-    }
-
-    function close() {
-        menu?.classList.add("desappear-left");
+    MenuBurguer.onClose(() => {
+        animation.end("desappear-left", menu);
         background?.classList.add("hidden");
-    }
-
-    MenuBurguer.onOpen(open);
-    MenuBurguer.onClose(close);
+    });
 
     background?.addEventListener("click", MenuBurguer.close);
 </script>

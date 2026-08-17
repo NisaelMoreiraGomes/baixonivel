@@ -14,6 +14,7 @@
 </div>
 
 <script>
+    import { animation } from "../scripts/animation";
     import Search from "../scripts/search";
     import Cookies from "../scripts/cookies";
 
@@ -25,11 +26,10 @@
     ) as HTMLScriptElement;
 
     Search.onOpen(() => {
-        inputSearch?.classList.remove("hidden");
-        inputSearch?.classList.add("appear-top");
+        animation.start("appear-top", inputSearch);
     });
 
-    Search.onClose(() => inputSearch?.classList.add("desappear-top"));
+    Search.onClose(() => animation.end("desappear-top", inputSearch));
 
     Cookies.onSearchPermitted(() => {
         if (googleScript && googleScript.dataset.src) {
@@ -40,16 +40,6 @@
             document.body.appendChild(newScript);
 
             googleScript.remove();
-        }
-    });
-
-    inputSearch?.addEventListener("animationend", (e: Event) => {
-        const animName = (e as AnimationEvent).animationName;
-
-        inputSearch.classList.remove(animName);
-
-        if (animName === "desappear-top") {
-            inputSearch.classList.add("hidden");
         }
     });
 
