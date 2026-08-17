@@ -59,7 +59,6 @@
     .searchBox {
         width: 700px;
         max-height: 90vh;
-        box-sizing: border-box;
         padding: 10px;
         background: #fff;
         color: #000;
@@ -83,5 +82,16 @@
 
     button:hover {
         background: red;
+    }
+
+    @media (max-width: 710px) {
+        .search {
+            top: 0px;
+            height: 100vh;
+        }
+
+        .searchBox {
+            max-height: 100vh;
+        }
     }
 </style>
