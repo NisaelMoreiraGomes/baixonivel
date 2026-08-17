@@ -66,6 +66,14 @@ button.disable {
     animation: desappear-left 0.3s;
 }
 
+.appear-bottom {
+    animation: appear-bottom 0.3s;
+}
+
+.desappear-bottom {
+    animation: desappear-bottom 0.3s;
+}
+
 @keyframes appear-top {
     from {
         top: -135px;
@@ -103,5 +111,25 @@ button.disable {
 
     to {
         left: calc(var(--menu-burguer-size) * -1);
+    }
+}
+
+@keyframes appear-bottom {
+    from {
+        bottom: -250px;
+    }
+
+    to {
+        bottom: 40px;
+    }
+}
+
+@keyframes desappear-bottom {
+    from {
+        bottom: 40px;
+    }
+
+    to {
+        bottom: -250px;
     }
 }

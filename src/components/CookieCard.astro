@@ -42,6 +42,7 @@ import { ORGANIZATIONAL_PAGES } from "../const";
 </div>
 
 <script>
+    import { animation } from "../scripts/animation";
     import Cookies from "../scripts/cookies";
     import CookieCard from "../scripts/cookieCard";
 
@@ -65,11 +66,12 @@ import { ORGANIZATIONAL_PAGES } from "../const";
         if (event.detail.loadState) {
             load_inputs_state();
         }
-        cookiesCard?.classList.remove("hidden");
+
+        animation.start("appear-bottom", cookiesCard);
     });
 
     CookieCard.onClose(() => {
-        cookiesCard?.classList.add("hidden");
+        animation.end("desappear-bottom", cookiesCard);
     });
 
     closeCookies?.addEventListener("click", () => {
