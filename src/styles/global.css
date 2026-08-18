@@ -2,7 +2,7 @@
     color-scheme: light dark;
 
     --bg-color: light-dark(#fff, #000);
-    --text-color: light-dark(#000, #fff);
+    --text-color: light-dark(#000, #CCC);
     --secundary-color: #47F66D;
     --accent-color: #9347f6;
 
@@ -17,9 +17,34 @@ body {
     background: var(--bg-color);
 }
 
+main {
+    text-align: justify;
+
+    max-width: 800px;
+    padding: 0px 20px;
+
+    margin: 0px auto;
+}
+
+time {
+    border-bottom: 2px dashed var(--text-color);
+}
+
+li {
+    padding: 5px 0px;
+}
+
+p:first-of-type {
+    margin-top: 30px;
+}
+
 a {
     color: var(--text-color);
     text-decoration: none;
+}
+
+h1 {
+    margin-bottom: 10px;
 }
 
 button {

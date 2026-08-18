@@ -18,7 +18,7 @@ type CookiesStatus = {
 }
 
 export default class Cookies {
-    private emitted: CookiesStatus = {
+    private static emitted: CookiesStatus = {
         ads: false,
         analitycs: false,
         search: false
@@ -60,18 +60,18 @@ export default class Cookies {
     }
 
     emit_status(status: CookiesStatus) {
-        if (status.ads && !this.emitted.ads) {
-            this.emitted.ads = true
+        if (status.ads && !Cookies.emitted.ads) {
+            Cookies.emitted.ads = true
             eventEmmit(adsCookieEventName)
         }
 
-        if (status.analitycs && !this.emitted.analitycs) {
-            this.emitted.analitycs = true
+        if (status.analitycs && !Cookies.emitted.analitycs) {
+            Cookies.emitted.analitycs = true
             eventEmmit(analyticsCookieEventName)
         }
 
-        if (status.search && !this.emitted.search) {
-            this.emitted.search = true
+        if (status.search && !Cookies.emitted.search) {
+            Cookies.emitted.search = true
             eventEmmit(searchCookieEventName)
         }
     }

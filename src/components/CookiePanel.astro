@@ -1,0 +1,65 @@
+<div
+    class="cookies-panel"
+    data-version={import.meta.env.EXPECTED_COOKIE_VERSION}
+>
+    <label>
+        <input type="checkbox" id="acS" />
+        Google Search - Permite carregar a busca do Google dentro do site.</label
+    >
+    <label>
+        <input type="checkbox" name="" id="acA" />
+        Google Analytics - Permite que o site colete estatísticas sobre sua utilização.
+    </label>
+    <label>
+        <input type="checkbox" name="" id="acAds" />Publicidade personalizada -
+        Permite que o Google personalize os anúncios exibidos com base em
+        interesses e atividades relacionadas à navegação.</label
+    >
+</div>
+
+<script>
+    import Cookies from "../scripts/cookies";
+
+    const cookiesPanel = document.querySelector(
+        ".cookies-panel",
+    ) as HTMLDivElement;
+
+    const inputSearch = document.querySelector("#acS") as HTMLInputElement;
+    const inputAnalytics = document.querySelector("#acA") as HTMLInputElement;
+    const inputAds = document.querySelector("#acAds") as HTMLInputElement;
+
+    const cookies = new Cookies(cookiesPanel?.dataset.version ?? "1.0");
+
+    function load_inputs_state() {
+        const { ads, analitycs, search } = cookies.get_status();
+
+        inputAds.checked = ads;
+        inputAnalytics.checked = analitycs;
+        inputSearch.checked = search;
+    }
+
+    [inputAds, inputAnalytics, inputSearch].forEach((input) => {
+        input.addEventListener("change", () => {
+            cookies.set_and_emit_status({
+                ads: inputAds.checked,
+                analitycs: inputAnalytics.checked,
+                search: inputSearch.checked,
+            });
+        });
+    });
+
+    load_inputs_state();
+</script>
+
+<style>
+    .cookies-panel {
+        border: 2px solid var(--text-color);
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    label {
+        display: block;
+        padding: 5px;
+    }
+</style>

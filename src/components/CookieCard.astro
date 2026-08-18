@@ -8,8 +8,8 @@ import { ORGANIZATIONAL_PAGES } from "../const";
 >
     <div class="cookie-card">
         <span
-            >Esse site usa cookies de terceiros para algumas funcionalidades.
-            Você pode conferir nossa <a
+            >Esse site utiliza serviços de terceiros para algumas
+            funcionalidades. Você pode conferir nossa <a
                 href={ORGANIZATIONAL_PAGES[2].page}
                 title={ORGANIZATIONAL_PAGES[2].link_description}
                 >política de privacidade</a
@@ -18,21 +18,19 @@ import { ORGANIZATIONAL_PAGES } from "../const";
 
         <div>
             <label>
-                <input type="checkbox" checked class="acS" /> Cookies para usar a
-                barra de pesquisa do Google.
+                <input type="checkbox" checked class="acS" /> Google Search - Permite
+                carregar a busca do Google dentro do site.
             </label>
 
             <label>
-                <input type="checkbox" checked class="acA" /> Cookies do Google Analytics.
+                <input type="checkbox" checked class="acA" /> Google Analytics - Permite
+                que o site colete estatísticas sobre sua utilização.
             </label>
 
             <label>
-                <input type="checkbox" checked class="acAds" /> Cookies do Google
-                Adsense.
-            </label>
-            <label>
-                Caso você não permita Cookies do Google Adsense, os anúncios
-                seram exibidos no modo estrito.
+                <input type="checkbox" checked class="acAds" /> Publicidade personalizada
+                - Permite que o Google personalize os anúncios exibidos com base em
+                interesses e atividades relacionadas à navegação.
             </label>
             <label>
                 <button class="close-cookies">Fechar</button>
@@ -52,7 +50,7 @@ import { ORGANIZATIONAL_PAGES } from "../const";
     const searchInput = document.querySelector(".acS") as HTMLInputElement;
     const closeCookies = document.querySelector(".close-cookies");
 
-    const cookies = new Cookies(cookiesCard.dataset.version ?? "1.0");
+    const cookies = new Cookies(cookiesCard?.dataset.version ?? "1.0");
 
     function load_inputs_state() {
         const { ads, analitycs, search } = cookies.get_status();
@@ -97,6 +95,7 @@ import { ORGANIZATIONAL_PAGES } from "../const";
         position: fixed;
         bottom: 40px;
         left: 0px;
+        z-index: 3;
         display: flex;
         justify-content: center;
     }
