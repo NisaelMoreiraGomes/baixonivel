@@ -8,28 +8,28 @@ import Thumb from "../assets/home/thumb.png";
 ---
 
 <Scaffold>
-	<ContentHead
-		slot="head"
-		type="website"
-		title={HOME_PAGE.title}
-		description={HOME_PAGE.description}
-		thumb={{
-			resource: Thumb,
-			description: HOME_PAGE.thumb?.description || "",
-		}}
-	/>
+  <ContentHead
+    slot="head"
+    type="website"
+    title={HOME_PAGE.title}
+    description={HOME_PAGE.description}
+    thumb={{
+      resource: Thumb,
+      description: HOME_PAGE.thumb?.description || "",
+    }}
+  />
 
-	<div>Em breve teremos algo bacana por aqui!!!</div>
+  <div>Em breve teremos algo bacana por aqui!!!</div>
 </Scaffold>
 
 <style>
-	div {
-		display: flex;
-		height: 70vh;
-		justify-content: center;
-		align-items: center;
-		text-align: center;
-		font-size: 1.4rem;
-		font-weight: bold;
-	}
+  div {
+    display: flex;
+    height: 70vh;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: bold;
+  }
 </style>

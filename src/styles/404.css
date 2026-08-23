@@ -1,13 +1,13 @@
 :root {
-    color-scheme: light dark;
+  color-scheme: light dark;
 
-    --bg-color: light-dark(#fff, #000);
-    --text-color: light-dark(#000, #fff);
+  --bg-color: light-dark(#fff, #000);
+  --text-color: light-dark(#000, #fff);
 }
 
 body {
-    margin: 0;
-    font: normal 16px sans-serif;
-    color: var(--text-color);
-    background: var(--bg-color);
+  margin: 0;
+  font: normal 16px sans-serif;
+  color: var(--text-color);
+  background: var(--bg-color);
 }

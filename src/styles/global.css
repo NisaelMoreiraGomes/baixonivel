@@ -1,160 +1,160 @@
 :root {
-    color-scheme: light dark;
+  color-scheme: light dark;
 
-    --bg-color: light-dark(#fff, #000);
-    --text-color: light-dark(#000, #CCC);
-    --secundary-color: #47F66D;
-    --accent-color: #9347f6;
+  --bg-color: light-dark(#fff, #000);
+  --text-color: light-dark(#000, #ccc);
+  --secundary-color: #47f66d;
+  --accent-color: #9347f6;
 
-    --nav-bar-size: 55px;
-    --menu-burguer-size: 250px;
+  --nav-bar-size: 55px;
+  --menu-burguer-size: 250px;
 }
 
 body {
-    margin: 0;
-    font: normal 16px sans-serif;
-    color: var(--text-color);
-    background: var(--bg-color);
+  margin: 0;
+  font: normal 16px sans-serif;
+  color: var(--text-color);
+  background: var(--bg-color);
 }
 
 main {
-    text-align: justify;
+  text-align: justify;
 
-    max-width: 800px;
-    padding: 0px 20px;
+  max-width: 800px;
+  padding: 0px 20px;
 
-    margin: 0px auto;
+  margin: 0px auto;
 }
 
 time {
-    border-bottom: 2px dashed var(--text-color);
+  border-bottom: 2px dashed var(--text-color);
 }
 
 li {
-    padding: 5px 0px;
+  padding: 5px 0px;
 }
 
 p:first-of-type {
-    margin-top: 30px;
+  margin-top: 30px;
 }
 
 a {
-    color: var(--text-color);
-    text-decoration: none;
+  color: var(--text-color);
+  text-decoration: none;
 }
 
 h1 {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 button {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 button.disable {
-    text-decoration: line-through;
-    opacity: 0.3;
+  text-decoration: line-through;
+  opacity: 0.3;
 }
 
 .full-bg {
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    z-index: 2;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 2;
 
-    width: 100vw;
-    height: 100vh;
+  width: 100vw;
+  height: 100vh;
 }
 
 .bg-blur {
-    background: color-mix(in srgb, var(--bg-color) 70%, transparent);
-    backdrop-filter: blur(20px);
+  background: color-mix(in srgb, var(--bg-color) 70%, transparent);
+  backdrop-filter: blur(20px);
 }
 
 .hidden {
-    display: none !important;
+  display: none !important;
 }
 
 .appear-top {
-    animation: appear-top 0.3s;
+  animation: appear-top 0.3s;
 }
 
 .desappear-top {
-    animation: desappear-top 0.3s;
+  animation: desappear-top 0.3s;
 }
 
 .appear-left {
-    animation: appear-left 0.3s;
+  animation: appear-left 0.3s;
 }
 
 .desappear-left {
-    animation: desappear-left 0.3s;
+  animation: desappear-left 0.3s;
 }
 
 .appear-bottom {
-    animation: appear-bottom 0.3s;
+  animation: appear-bottom 0.3s;
 }
 
 .desappear-bottom {
-    animation: desappear-bottom 0.3s;
+  animation: desappear-bottom 0.3s;
 }
 
 @keyframes appear-top {
-    from {
-        top: -135px;
-    }
+  from {
+    top: -135px;
+  }
 
-    to {
-        top: 20px;
-    }
+  to {
+    top: 20px;
+  }
 }
 
 @keyframes desappear-top {
-    from {
-        top: 20px;
-    }
+  from {
+    top: 20px;
+  }
 
-    to {
-        top: -135px;
-    }
+  to {
+    top: -135px;
+  }
 }
 
 @keyframes appear-left {
-    from {
-        left: calc(var(--menu-burguer-size) * -1);
-    }
+  from {
+    left: calc(var(--menu-burguer-size) * -1);
+  }
 
-    to {
-        left: 0px;
-    }
+  to {
+    left: 0px;
+  }
 }
 
 @keyframes desappear-left {
-    from {
-        left: 0px;
-    }
+  from {
+    left: 0px;
+  }
 
-    to {
-        left: calc(var(--menu-burguer-size) * -1);
-    }
+  to {
+    left: calc(var(--menu-burguer-size) * -1);
+  }
 }
 
 @keyframes appear-bottom {
-    from {
-        bottom: -250px;
-    }
+  from {
+    bottom: -250px;
+  }
 
-    to {
-        bottom: 40px;
-    }
+  to {
+    bottom: 40px;
+  }
 }
 
 @keyframes desappear-bottom {
-    from {
-        bottom: 40px;
-    }
+  from {
+    bottom: 40px;
+  }
 
-    to {
-        bottom: -250px;
-    }
+  to {
+    bottom: -250px;
+  }
 }

@@ -11,36 +11,36 @@ import Footer from "../components/Footer.astro";
 
 <!doctype html>
 <html lang={SITE_CONFIG.lang}>
-    <head>
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="icon" href="/favicon.ico" />
-        <meta name="viewport" content="width=device-width" />
-        <meta charset="utf-8" />
+  <head>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8" />
 
-        <slot name="head" />
+    <slot name="head" />
 
-        <link rel="sitemap" href="/sitemap-index.xml" />
-        <link
-            rel="alternate"
-            type="application/rss+xml"
-            title={SITE_CONFIG.name}
-            href={new URL("rss.xml", Astro.site)}
-        />
-    </head>
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={SITE_CONFIG.name}
+      href={new URL("rss.xml", Astro.site)}
+    />
+  </head>
 
-    <body>
-        <header>
-            <Nav />
-        </header>
+  <body>
+    <header>
+      <Nav />
+    </header>
 
-        <FullBg />
+    <FullBg />
 
-        <main>
-            <slot />
-        </main>
+    <main>
+      <slot />
+    </main>
 
-        <CookieCard />
+    <CookieCard />
 
-        <Footer />
-    </body>
+    <Footer />
+  </body>
 </html>

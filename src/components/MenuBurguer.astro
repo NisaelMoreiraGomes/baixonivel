@@ -3,7 +3,7 @@ import Logo from "../../public/favicon.svg";
 import type { Link } from "../const";
 
 interface Props {
-    links?: Link[];
+  links?: Link[];
 }
 
 const { links = [] } = Astro.props;
@@ -12,94 +12,94 @@ import { ORGANIZATIONAL_PAGES } from "../const";
 ---
 
 <div class="menu-burguer hidden bg-blur">
-    <div class="cover">
-        <Logo width="150" />
-    </div>
-    <div>
-        {
-            links.map((link) => (
-                <a href={link.page} title={link.link_description}>
-                    {link.content}
-                </a>
-            ))
-        }
-    </div>
-    <div class="about-links">
-        {
-            ORGANIZATIONAL_PAGES.map((link) => (
-                <a href={link.page} title={link.link_description}>
-                    {link.content}
-                </a>
-            ))
-        }
-    </div>
+  <div class="cover">
+    <Logo width="150" />
+  </div>
+  <div>
+    {
+      links.map((link) => (
+        <a href={link.page} title={link.link_description}>
+          {link.content}
+        </a>
+      ))
+    }
+  </div>
+  <div class="about-links">
+    {
+      ORGANIZATIONAL_PAGES.map((link) => (
+        <a href={link.page} title={link.link_description}>
+          {link.content}
+        </a>
+      ))
+    }
+  </div>
 </div>
 
 <script>
-    import MenuBurguer from "../scripts/menuBurguer";
-    import { animation } from "../scripts/animation";
+  import MenuBurguer from "../scripts/menuBurguer";
+  import { animation } from "../scripts/animation";
 
-    const menu = document.querySelector(".menu-burguer");
-    const background = document.querySelector(".full-bg");
+  const menu = document.querySelector(".menu-burguer");
+  const background = document.querySelector(".full-bg");
 
-    MenuBurguer.onOpen(() => {
-        animation.start("appear-left", menu);
-        background?.classList.remove("hidden");
-    });
+  MenuBurguer.onOpen(() => {
+    animation.start("appear-left", menu);
+    background?.classList.remove("hidden");
+  });
 
-    MenuBurguer.onClose(() => {
-        animation.end("desappear-left", menu);
-        background?.classList.add("hidden");
-    });
+  MenuBurguer.onClose(() => {
+    animation.end("desappear-left", menu);
+    background?.classList.add("hidden");
+  });
 
-    background?.addEventListener("click", MenuBurguer.close);
+  background?.addEventListener("click", MenuBurguer.close);
 </script>
 
 <style>
-    .menu-burguer {
-        text-align: center;
+  .menu-burguer {
+    text-align: center;
 
-        position: fixed;
-        top: 0px;
-        z-index: 3;
+    position: fixed;
+    top: 0px;
+    z-index: 3;
 
-        width: var(--menu-burguer-size);
-        height: 100vh;
+    width: var(--menu-burguer-size);
+    height: 100vh;
 
-        overflow-y: scroll;
+    overflow-y: scroll;
 
-        box-shadow: 0 0 7px rgba(200, 200, 200, 0.4);
-    }
+    box-shadow: 0 0 7px rgba(200, 200, 200, 0.4);
+  }
 
-    .menu-burguer .cover {
-        padding: 10px 0px;
-    }
+  .menu-burguer .cover {
+    padding: 10px 0px;
+  }
 
-    a {
-        display: block;
-        vertical-align: middle;
-        text-align: left;
+  a {
+    display: block;
+    vertical-align: middle;
+    text-align: left;
 
-        padding: 15px;
+    padding: 15px;
 
-        transition:
-            color 1s ease-out,
-            background 0.5s ease-in-out;
-    }
+    transition:
+      color 1s ease-out,
+      background 0.5s ease-in-out;
+  }
 
-    a:hover {
-        background: color-mix(in srgb, var(--secundary-color) 70%, transparent);
-    }
+  a:hover {
+    background: color-mix(in srgb, var(--secundary-color) 70%, transparent);
+  }
 
+  .about-links {
+    display: none;
+
+    border-top: 2px dashed var(--secundary-color);
+  }
+
+  @media (max-width: 649px) {
     .about-links {
-        display: none;
-
-        border-top: 2px dashed var(--secundary-color);
+      display: block;
     }
-
-    @media (max-width: 649px) {
-        .about-links {
-            display: block;
-        }
-    }
+  }
 </style>

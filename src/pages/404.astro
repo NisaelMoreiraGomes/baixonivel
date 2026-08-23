@@ -6,33 +6,33 @@ import ContentHead from "../components/ContentHead.astro";
 ---
 
 <Scaffold>
-    <ContentHead
-        slot="head"
-        type="website"
-        title={SITE_CONFIG.name + ": Página não encontrada, que pena!!!"}
-        description="Infelizmente a página que você procura não foi encontrada."
-    />
+  <ContentHead
+    slot="head"
+    type="website"
+    title={SITE_CONFIG.name + ": Página não encontrada, que pena!!!"}
+    description="Infelizmente a página que você procura não foi encontrada."
+  />
 
-    <div>
-        <h1>Página não encontrada</h1>
-        <p>Infelizmente não achamos a requisição que você pediu.</p>
-    </div>
+  <div>
+    <h1>Página não encontrada</h1>
+    <p>Infelizmente não achamos a requisição que você pediu.</p>
+  </div>
 </Scaffold>
 
 <style>
-    div {
-        width: 100vw;
-        height: 100vh;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+  div {
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 
-    h1,
-    p {
-        margin: 5px 0px;
-        padding: 0;
-    }
+  h1,
+  p {
+    margin: 5px 0px;
+    padding: 0;
+  }
 </style>

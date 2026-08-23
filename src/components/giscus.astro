@@ -1,42 +1,42 @@
 ---
 interface Props {
-    mapping?: string;
-    strict?: string;
-    reactions?: string;
-    metadata?: string;
-    position?: string;
-    theme?: string;
-    lang?: string;
-    loading?: string;
-    crossorigin?: string;
+  mapping?: string;
+  strict?: string;
+  reactions?: string;
+  metadata?: string;
+  position?: string;
+  theme?: string;
+  lang?: string;
+  loading?: string;
+  crossorigin?: string;
 }
 
 const {
-    mapping = "pathname",
-    strict = "0",
-    reactions = "1",
-    metadata = "0",
-    position = "top",
-    theme = "preferred_color_scheme",
-    lang = "pt",
-    loading = "lazy",
-    crossorigin = "anonymous",
+  mapping = "pathname",
+  strict = "0",
+  reactions = "1",
+  metadata = "0",
+  position = "top",
+  theme = "preferred_color_scheme",
+  lang = "pt",
+  loading = "lazy",
+  crossorigin = "anonymous",
 } = Astro.props;
 ---
 
 <script
-    src="https://giscus.app/client.js"
-    data-repo={import.meta.env.DATA_REPO}
-    data-repo-id={import.meta.env.DATA_REPO_ID}
-    data-category={import.meta.env.DATA_CATEGORY}
-    data-category-id={import.meta.env.DATA_CATEGORY_ID}
-    data-mapping={mapping}
-    data-strict={strict}
-    data-reactions-enabled={reactions}
-    data-emit-metadata={metadata}
-    data-input-position={position}
-    data-theme={theme}
-    data-lang={lang}
-    data-loading={loading}
-    crossorigin={crossorigin}
-    async></script>
+  src="https://giscus.app/client.js"
+  data-repo={import.meta.env.DATA_REPO}
+  data-repo-id={import.meta.env.DATA_REPO_ID}
+  data-category={import.meta.env.DATA_CATEGORY}
+  data-category-id={import.meta.env.DATA_CATEGORY_ID}
+  data-mapping={mapping}
+  data-strict={strict}
+  data-reactions-enabled={reactions}
+  data-emit-metadata={metadata}
+  data-input-position={position}
+  data-theme={theme}
+  data-lang={lang}
+  data-loading={loading}
+  crossorigin={crossorigin}
+  async></script>

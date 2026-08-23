@@ -1,23 +1,21 @@
 ---
 import { SITE_CONFIG } from "../const";
+import type { Thumb } from "../types/thumb.type";
 
 interface Props {
-    locale?: string;
-    type?: string;
-    title: string;
-    description: string;
-    thumb?: {
-        resource: ImageMetadata;
-        description: string;
-    };
+  locale?: string;
+  type?: string;
+  title: string;
+  description: string;
+  thumb?: Thumb;
 }
 
 const {
-    locale = SITE_CONFIG.lang,
-    type = "article",
-    title,
-    description,
-    thumb,
+  locale = SITE_CONFIG.lang,
+  type = "article",
+  title,
+  description,
+  thumb,
 } = Astro.props;
 ---
 
@@ -34,28 +32,25 @@ const {
 <meta property="og:url" content={Astro.url} />
 <meta property="og:site_name" content={SITE_CONFIG.name} />
 {
-    thumb && (
-        <meta
-            property="og:image"
-            content={new URL(thumb.resource.src, Astro.site)}
-        />
-    )
+  thumb && (
+    <meta
+      property="og:image"
+      content={new URL(thumb.resource.src, Astro.site)}
+    />
+  )
 }
 {
-    thumb && (
-        <meta
-            property="og:image:width"
-            content={thumb.resource.width.toString()}
-        />
-    )
+  thumb && (
+    <meta property="og:image:width" content={thumb.resource.width.toString()} />
+  )
 }
 {
-    thumb && (
-        <meta
-            property="og:image:height"
-            content={thumb.resource.height.toString()}
-        />
-    )
+  thumb && (
+    <meta
+      property="og:image:height"
+      content={thumb.resource.height.toString()}
+    />
+  )
 }
 {thumb && <meta property="og:image:alt" content={thumb.description} />}
 {thumb && <meta name="twitter:card" content="summary_large_image" />}
