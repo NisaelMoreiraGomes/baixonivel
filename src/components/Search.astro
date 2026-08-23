@@ -1,97 +1,100 @@
 <div class="search hidden">
-    <div class="searchBox">
-        <div class="bar">
-            <span>Pesquise com o Google</span>
-            <button class="closeSearch">X</button>
-        </div>
-        <script
-            id="google-search-script"
-            type="text/javascript-lazy"
-            data-src={"https://cse.google.com/cse.js?cx=" +
-                import.meta.env.GOOGLE_SEARCH_ID}></script>
-        <div class="gcse-search"></div>
+  <div class="searchBox">
+    <div class="bar">
+      <span>Pesquise com o Google</span>
+      <button class="closeSearch">X</button>
     </div>
+    <script
+      id="google-search-script"
+      type="text/javascript-lazy"
+      data-src={"https://cse.google.com/cse.js?cx=" +
+        import.meta.env.GOOGLE_SEARCH_ID}></script>
+    <div class="gcse-search"></div>
+  </div>
 </div>
 
 <script>
-    import { animation } from "../scripts/animation";
-    import Search from "../scripts/search";
-    import Cookies from "../scripts/cookies";
+  import { animation } from "../scripts/animation";
+  import Search from "../scripts/search";
+  import Cookies from "../scripts/cookies";
 
-    const inputSearch = document.querySelector(".search");
-    const closeSearch = document.querySelector(".closeSearch");
+  let included = false;
 
-    const googleScript = document.querySelector(
-        "#google-search-script",
-    ) as HTMLScriptElement;
+  const inputSearch = document.querySelector(".search");
+  const closeSearch = document.querySelector(".closeSearch");
 
-    Search.onOpen(() => {
-        animation.start("appear-top", inputSearch);
-    });
+  const googleScript = document.querySelector(
+    "#google-search-script",
+  ) as HTMLScriptElement;
 
-    Search.onClose(() => animation.end("desappear-top", inputSearch));
+  Search.onOpen(() => {
+    animation.start("appear-top", inputSearch);
+  });
 
-    Cookies.onSearchPermitted(() => {
-        if (googleScript && googleScript.dataset.src) {
-            const newScript = document.createElement("script");
-            newScript.src = googleScript.dataset.src;
-            newScript.type = "text/javascript";
+  Search.onClose(() => animation.end("desappear-top", inputSearch));
 
-            document.body.appendChild(newScript);
+  Cookies.onSearchPermitted(() => {
+    if (googleScript && googleScript.dataset.src && !included) {
+      const newScript = document.createElement("script");
+      newScript.src = googleScript.dataset.src;
+      newScript.type = "text/javascript";
 
-            googleScript.remove();
-        }
-    });
+      document.body.appendChild(newScript);
 
-    closeSearch?.addEventListener("click", () => Search.close());
+      googleScript.remove();
+      included = true;
+    }
+  });
+
+  closeSearch?.addEventListener("click", () => Search.close());
 </script>
 
 <style>
+  .search {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    z-index: 3;
+    top: 20px;
+  }
+
+  .searchBox {
+    width: 700px;
+    max-height: 90vh;
+    padding: 10px;
+    background: #fff;
+    color: #000;
+    border: 1px solid #ccc;
+    overflow: scroll;
+  }
+
+  .bar {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  button {
+    border: none;
+    background: #ccc;
+    color: #000;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background 0.3s ease-in-out;
+  }
+
+  button:hover {
+    background: red;
+  }
+
+  @media (max-width: 710px) {
     .search {
-        width: 100vw;
-        display: flex;
-        justify-content: center;
-        position: fixed;
-        z-index: 3;
-        top: 20px;
+      top: 0px;
+      height: 100vh;
     }
 
     .searchBox {
-        width: 700px;
-        max-height: 90vh;
-        padding: 10px;
-        background: #fff;
-        color: #000;
-        border: 1px solid #ccc;
-        overflow: scroll;
+      max-height: 100vh;
     }
-
-    .bar {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    button {
-        border: none;
-        background: #ccc;
-        color: #000;
-        font-weight: bold;
-        border-radius: 5px;
-        transition: background 0.3s ease-in-out;
-    }
-
-    button:hover {
-        background: red;
-    }
-
-    @media (max-width: 710px) {
-        .search {
-            top: 0px;
-            height: 100vh;
-        }
-
-        .searchBox {
-            max-height: 100vh;
-        }
-    }
+  }
 </style>

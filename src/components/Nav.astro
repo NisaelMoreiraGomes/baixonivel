@@ -11,146 +11,146 @@ const pathname = Astro.url.pathname;
 ---
 
 <nav>
-    <div class="navbar bg-blur">
-        <div class="start">
-            <button
-                class="openBurguer"
-                title="Abra a gaveta para ver as categorias e muito mais."
-                >≡</button
-            >
-            <a
-                class:list={{ activated: pathname === HOME_PAGE.page }}
-                class="logo"
-                href={HOME_PAGE.page}
-                title={HOME_PAGE.link_description}>{SITE_CONFIG.name}</a
-            >
-        </div>
-        <div class="end">
-            {
-                ORGANIZATIONAL_PAGES.map((link) => (
-                    <a
-                        href={link.page}
-                        title={link.link_description}
-                        class:list={{
-                            activated: pathname.startsWith(link.page),
-                        }}
-                    >
-                        {link.content}
-                    </a>
-                ))
-            }
-
-            <button
-                class="openSearch disable"
-                title="Busca personalizada pelo mecanismo do Google.">🔎</button
-            >
-        </div>
+  <div class="navbar bg-blur">
+    <div class="start">
+      <button
+        class="openBurguer"
+        title="Abra a gaveta para ver as categorias e muito mais.">≡</button
+      >
+      <a
+        class:list={{ activated: pathname === HOME_PAGE.page }}
+        class="logo"
+        href={HOME_PAGE.page}
+        title={HOME_PAGE.link_description}>{SITE_CONFIG.name}</a
+      >
     </div>
+    <div class="end">
+      {
+        ORGANIZATIONAL_PAGES.map((link) => (
+          <a
+            href={link.page}
+            title={link.link_description}
+            class:list={{
+              activated: pathname.startsWith(link.page),
+            }}
+          >
+            {link.content}
+          </a>
+        ))
+      }
 
-    <MenuBurguer />
-    <Search />
+      <button
+        class="openSearch disable"
+        title="Busca personalizada pelo mecanismo do Google.">🔎</button
+      >
+    </div>
+  </div>
+
+  <MenuBurguer />
+  <Search />
 </nav>
 
 <script>
-    import Cookies from "../scripts/cookies";
-    import CookieCard from "../scripts/cookieCard";
+  import Cookies from "../scripts/cookies";
+  import CookieCard from "../scripts/cookieCard";
 
-    import MenuBurguer from "../scripts/menuBurguer";
-    import Search from "../scripts/search";
+  import MenuBurguer from "../scripts/menuBurguer";
+  import Search from "../scripts/search";
 
-    const searchButton = document.querySelector(
-        ".openSearch",
-    ) as HTMLButtonElement;
+  const searchButton = document.querySelector(
+    ".openSearch",
+  ) as HTMLButtonElement;
 
-    document
-        .querySelector(".openBurguer")
-        ?.addEventListener("click", () => MenuBurguer.open());
+  document
+    .querySelector(".openBurguer")
+    ?.addEventListener("click", () => MenuBurguer.open());
 
-    searchButton.addEventListener("click", () => {
-        if (searchButton.classList.contains("disable")) {
-            alert(
-                "Para realizar buscas, é preciso haver o consentimento do uso de cookies de terceiros.",
-            );
-            CookieCard.open();
-            return;
-        }
+  searchButton.addEventListener("click", () => {
+    if (searchButton.classList.contains("disable")) {
+      alert(
+        "Para realizar buscas, é preciso haver o consentimento do uso de cookies de terceiros.",
+      );
+      CookieCard.open();
+      return;
+    }
 
-        Search.open();
-    });
+    Search.open();
+  });
 
-    Cookies.onSearchPermitted(() => searchButton.classList.remove("disable"));
+  Cookies.onSearchPermitted(() => searchButton.classList.remove("disable"));
+  Cookies.onSearchDenied(() => searchButton.classList.add("disable"));
 </script>
 
 <style>
-    nav {
-        margin-bottom: var(--nav-bar-size);
-    }
+  nav {
+    margin-bottom: var(--nav-bar-size);
+  }
 
-    button {
-        background: none;
-        border: none;
-        font-size: 1.5rem;
-    }
+  button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+  }
 
-    a {
-        display: inline-block;
-        padding: 10px;
-    }
+  a {
+    display: inline-block;
+    padding: 10px;
+  }
 
-    a,
-    button {
-        border-bottom: 2px solid var(--bg-color);
-        transition:
-            color 0.3s ease-out,
-            border 1s ease-in-out;
-    }
+  a,
+  button {
+    border-bottom: 2px solid var(--bg-color);
+    transition:
+      color 0.3s ease-out,
+      border 1s ease-in-out;
+  }
 
-    a:hover,
-    button:hover {
-        color: var(--secundary-color);
-        border-bottom: 2px dotted var(--secundary-color);
-    }
+  a:hover,
+  button:hover {
+    color: var(--secundary-color);
+    border-bottom: 2px dotted var(--secundary-color);
+  }
 
+  .navbar {
+    position: fixed;
+    top: 0px;
+    z-index: 1;
+
+    width: 100vw;
+    height: var(--nav-bar-size);
+  }
+
+  .navbar,
+  .start,
+  .end {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .logo {
+    font-size: 1.4rem;
+  }
+
+  .activated {
+    border-color: var(--secundary-color);
+  }
+  .activated:hover {
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+  }
+
+  @media (max-width: 430px) {
     .navbar {
-        position: fixed;
-        top: 0px;
-        z-index: 1;
+      justify-content: space-between;
+      padding: 0px 10px;
+      box-sizing: border-box;
+    }
+  }
 
-        width: 100vw;
-        height: var(--nav-bar-size);
+  @media (max-width: 649px) {
+    .end a {
+      display: none;
     }
-
-    .navbar,
-    .start,
-    .end {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-    }
-
-    .logo {
-        font-size: 1.4rem;
-    }
-
-    .activated {
-        border-color: var(--secundary-color);
-    }
-    .activated:hover {
-        color: var(--accent-color);
-        border-color: var(--accent-color);
-    }
-
-    @media (max-width: 430px) {
-        .navbar {
-            justify-content: space-between;
-            padding: 0px 10px;
-            box-sizing: border-box;
-        }
-    }
-
-    @media (max-width: 649px) {
-        .end a {
-            display: none;
-        }
-    }
+  }
 </style>
