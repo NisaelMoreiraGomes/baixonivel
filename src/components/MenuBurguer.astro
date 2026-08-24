@@ -4,6 +4,7 @@ import { ORGANIZATIONAL_PAGES } from "../const";
 import Logo from "../../public/favicon.svg";
 import type { Link } from "../types/link.type";
 import { getCategories } from "../libs/posts";
+import slug from "../libs/utils/slug";
 
 interface Props {
   links?: Link[];
@@ -12,7 +13,7 @@ interface Props {
 const categories = (await getCategories()).map(
   (category) =>
     ({
-      page: new URL("categorias/" + category.toLowerCase(), Astro.site).href,
+      page: new URL(`categorias/${slug(category)}`, Astro.site).href,
       content: category,
       link_description: "Todos os posts da categoria " + category + ".",
     }) as Link,
