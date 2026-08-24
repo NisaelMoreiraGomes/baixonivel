@@ -17,6 +17,10 @@ body {
   background: var(--bg-color);
 }
 
+nav {
+  margin-bottom: var(--nav-bar-size);
+}
+
 main {
   text-align: justify;
 
@@ -26,16 +30,8 @@ main {
   margin: 0px auto;
 }
 
-time {
-  border-bottom: 2px dashed var(--text-color);
-}
-
 li {
   padding: 5px 0px;
-}
-
-p:first-of-type {
-  margin-top: 30px;
 }
 
 a {
@@ -43,8 +39,8 @@ a {
   text-decoration: none;
 }
 
-h1 {
-  margin-bottom: 10px;
+a:hover {
+  color: var(--secundary-color);
 }
 
 button {

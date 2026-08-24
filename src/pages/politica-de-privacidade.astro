@@ -1,4 +1,6 @@
 ---
+import "../styles/content.css";
+
 import { ORGANIZATIONAL_PAGES } from "../const";
 
 import Scaffold from "../layout/Scaffold.astro";
@@ -17,336 +19,344 @@ const PAGE = ORGANIZATIONAL_PAGES[2];
     description={PAGE.description}
   />
 
-  <h1>Política de Privacidade</h1>
+  <article>
+    <header>
+      <h1>Política de Privacidade</h1>
 
-  <FormattedDate date={new Date("2026-08-18")} />
+      <p><FormattedDate date={new Date("2026-08-18")} /></p>
+    </header>
 
-  <p>
-    O BaixoNível é um site estático. Isso significa que o conteúdo das páginas é
-    disponibilizado principalmente como arquivos HTML, CSS e JavaScript, sem que
-    o site mantenha, por conta própria, um banco de dados com informações
-    pessoais dos visitantes.
-  </p>
+    <p>
+      O BaixoNível é um site estático. Isso significa que o conteúdo das páginas
+      é disponibilizado principalmente como arquivos HTML, CSS e JavaScript, sem
+      que o site mantenha, por conta própria, um banco de dados com informações
+      pessoais dos visitantes.
+    </p>
 
-  <p>
-    Para disponibilizar determinadas funcionalidades, medir o acesso ao site e
-    manter sua operação, o BaixoNível utiliza serviços fornecidos por terceiros,
-    que podem coletar ou processar determinadas informações de acordo com suas
-    próprias políticas de privacidade.
-  </p>
+    <p>
+      Para disponibilizar determinadas funcionalidades, medir o acesso ao site e
+      manter sua operação, o BaixoNível utiliza serviços fornecidos por
+      terceiros, que podem coletar ou processar determinadas informações de
+      acordo com suas próprias políticas de privacidade.
+    </p>
 
-  <h2>1. Serviços utilizados</h2>
+    <h2>1. Serviços utilizados</h2>
 
-  <p>Atualmente, o BaixoNível utiliza os seguintes serviços de terceiros:</p>
+    <p>Atualmente, o BaixoNível utiliza os seguintes serviços de terceiros:</p>
 
-  <ul>
-    <li>
-      Google Custom Search — utilizado para disponibilizar a busca de conteúdo
+    <ul>
+      <li>
+        Google Custom Search — utilizado para disponibilizar a busca de conteúdo
+        dentro do site.
+      </li>
+      <li>
+        Google Analytics — utilizado para obter informações estatísticas sobre o
+        acesso e a utilização do site.
+      </li>
+      <li>
+        Google AdSense — utilizado para exibir anúncios e contribuir para a
+        manutenção do site.
+      </li>
+      <li>
+        Serviços de hospedagem e infraestrutura, incluindo eventualmente
+        serviços da Cloudflare, utilizados para disponibilizar, proteger e
+        melhorar o funcionamento do site.
+      </li>
+    </ul>
+
+    <p>
+      Esses serviços podem utilizar cookies, identificadores, endereços IP e
+      outras tecnologias semelhantes, conforme suas respectivas configurações e
+      políticas.
+    </p>
+
+    <h2>2. Cookies e preferências</h2>
+
+    <p>
+      Cookies são pequenos arquivos ou informações armazenadas no navegador do
+      visitante por um site ou por serviços de terceiros utilizados por ele.
+    </p>
+
+    <p>
+      O BaixoNível procura limitar o uso de cookies ao necessário para o
+      funcionamento de suas funcionalidades e aos serviços de terceiros
+      utilizados no site.
+    </p>
+
+    <p>
+      O painel de preferências abaixo permite que o visitante escolha como
+      determinados serviços de terceiros poderão ser utilizados durante sua
+      navegação.
+    </p>
+
+    <CookiePanel />
+
+    <p>
+      As preferências selecionadas pelo visitante são aplicadas da seguinte
+      forma:
+    </p>
+
+    <h3>Google Custom Search</h3>
+
+    <p>
+      O Google Custom Search é utilizado para disponibilizar a busca de conteúdo
       dentro do site.
-    </li>
-    <li>
-      Google Analytics — utilizado para obter informações estatísticas sobre o
-      acesso e a utilização do site.
-    </li>
-    <li>
-      Google AdSense — utilizado para exibir anúncios e contribuir para a
-      manutenção do site.
-    </li>
-    <li>
-      Serviços de hospedagem e infraestrutura, incluindo eventualmente serviços
-      da Cloudflare, utilizados para disponibilizar, proteger e melhorar o
-      funcionamento do site.
-    </li>
-  </ul>
+    </p>
 
-  <p>
-    Esses serviços podem utilizar cookies, identificadores, endereços IP e
-    outras tecnologias semelhantes, conforme suas respectivas configurações e
-    políticas.
-  </p>
+    <p>
+      Caso o visitante não autorize essa categoria, os scripts necessários para
+      carregar o Google Custom Search não serão carregados e a funcionalidade de
+      busca fornecida pelo Google ficará indisponível.
+    </p>
 
-  <h2>2. Cookies e preferências</h2>
+    <h3>Google Analytics</h3>
 
-  <p>
-    Cookies são pequenos arquivos ou informações armazenadas no navegador do
-    visitante por um site ou por serviços de terceiros utilizados por ele.
-  </p>
+    <p>
+      O Google Analytics é utilizado para obter estatísticas sobre o acesso e a
+      utilização do site.
+    </p>
 
-  <p>
-    O BaixoNível procura limitar o uso de cookies ao necessário para o
-    funcionamento de suas funcionalidades e aos serviços de terceiros utilizados
-    no site.
-  </p>
+    <p>
+      Caso o visitante não autorize essa categoria, os scripts do Google
+      Analytics não serão carregados e o BaixoNível não utilizará o Google
+      Analytics para realizar análises de acesso daquela navegação.
+    </p>
 
-  <p>
-    O painel de preferências abaixo permite que o visitante escolha como
-    determinados serviços de terceiros poderão ser utilizados durante sua
-    navegação.
-  </p>
+    <h3>Google AdSense</h3>
 
-  <CookiePanel />
+    <p>
+      O Google AdSense é utilizado para exibir anúncios que ajudam a financiar a
+      manutenção do BaixoNível.
+    </p>
 
-  <p>
-    As preferências selecionadas pelo visitante são aplicadas da seguinte forma:
-  </p>
+    <p>
+      Caso o visitante autorize a utilização de publicidade personalizada, o
+      Google poderá utilizar informações e identificadores, incluindo cookies e
+      tecnologias semelhantes, para selecionar anúncios de acordo com interesses
+      e atividades relacionadas à navegação.
+    </p>
 
-  <h3>Google Custom Search</h3>
+    <p>
+      Caso o visitante não autorize a publicidade personalizada, os anúncios
+      continuarão podendo ser exibidos, porém serão utilizados anúncios não
+      personalizados. Nesse caso, a seleção dos anúncios é realizada
+      principalmente com base no contexto da página e em outras informações que
+      não dependem do histórico de navegação ou dos interesses do usuário.
+    </p>
 
-  <p>
-    O Google Custom Search é utilizado para disponibilizar a busca de conteúdo
-    dentro do site.
-  </p>
+    <p>
+      A desativação da publicidade personalizada, portanto, não significa que os
+      anúncios deixarão de ser exibidos.
+    </p>
 
-  <p>
-    Caso o visitante não autorize essa categoria, os scripts necessários para
-    carregar o Google Custom Search não serão carregados e a funcionalidade de
-    busca fornecida pelo Google ficará indisponível.
-  </p>
+    <h3>Cookies necessários</h3>
 
-  <h3>Google Analytics</h3>
+    <p>
+      Além dos serviços mencionados acima, a infraestrutura utilizada para
+      hospedar, entregar e proteger o site poderá utilizar cookies ou
+      tecnologias semelhantes que sejam necessários para o funcionamento,
+      segurança ou disponibilização do conteúdo.
+    </p>
 
-  <p>
-    O Google Analytics é utilizado para obter estatísticas sobre o acesso e a
-    utilização do site.
-  </p>
+    <p>
+      Esses recursos podem incluir aqueles utilizados pela empresa de hospedagem
+      ou por serviços de infraestrutura e proteção, como a Cloudflare.
+    </p>
 
-  <p>
-    Caso o visitante não autorize essa categoria, os scripts do Google Analytics
-    não serão carregados e o BaixoNível não utilizará o Google Analytics para
-    realizar análises de acesso daquela navegação.
-  </p>
+    <h2>2.1. Alteração das preferências</h2>
 
-  <h3>Google AdSense</h3>
+    <p>
+      O visitante poderá alterar suas preferências de cookies e serviços de
+      terceiros por meio do painel de privacidade disponibilizado no site.
+    </p>
 
-  <p>
-    O Google AdSense é utilizado para exibir anúncios que ajudam a financiar a
-    manutenção do BaixoNível.
-  </p>
+    <p>
+      Quando uma categoria que depende de consentimento for desativada, o
+      BaixoNível não carregará os scripts correspondentes, sempre que
+      tecnicamente possível.
+    </p>
 
-  <p>
-    Caso o visitante autorize a utilização de publicidade personalizada, o
-    Google poderá utilizar informações e identificadores, incluindo cookies e
-    tecnologias semelhantes, para selecionar anúncios de acordo com interesses e
-    atividades relacionadas à navegação.
-  </p>
+    <p>
+      As preferências relacionadas ao Google AdSense possuem funcionamento
+      diferente: a desativação da publicidade personalizada não remove os
+      anúncios, mas faz com que sejam utilizados anúncios não personalizados,
+      conforme as configurações e políticas aplicáveis do Google.
+    </p>
 
-  <p>
-    Caso o visitante não autorize a publicidade personalizada, os anúncios
-    continuarão podendo ser exibidos, porém serão utilizados anúncios não
-    personalizados. Nesse caso, a seleção dos anúncios é realizada
-    principalmente com base no contexto da página e em outras informações que
-    não dependem do histórico de navegação ou dos interesses do usuário.
-  </p>
+    <h2>3. Suas escolhas</h2>
 
-  <p>
-    A desativação da publicidade personalizada, portanto, não significa que os
-    anúncios deixarão de ser exibidos.
-  </p>
+    <p>
+      O BaixoNível disponibiliza mecanismos para que o visitante possa escolher
+      quais categorias de cookies e tecnologias de terceiros deseja permitir.
+    </p>
 
-  <h3>Cookies necessários</h3>
+    <p>
+      Quando uma categoria de cookies é recusada, o site procura impedir o uso
+      dos serviços correspondentes sempre que tecnicamente possível.
+    </p>
 
-  <p>
-    Além dos serviços mencionados acima, a infraestrutura utilizada para
-    hospedar, entregar e proteger o site poderá utilizar cookies ou tecnologias
-    semelhantes que sejam necessários para o funcionamento, segurança ou
-    disponibilização do conteúdo.
-  </p>
+    <p>
+      A recusa de cookies relacionados à publicidade não significa
+      necessariamente que os anúncios deixarão de ser exibidos. O Google AdSense
+      pode continuar exibindo anúncios não personalizados, de acordo com as
+      configurações aplicadas ao serviço.
+    </p>
 
-  <p>
-    Esses recursos podem incluir aqueles utilizados pela empresa de hospedagem
-    ou por serviços de infraestrutura e proteção, como a Cloudflare.
-  </p>
+    <p>
+      Da mesma forma, algumas tecnologias utilizadas pela infraestrutura
+      necessária para disponibilizar o site podem não depender de consentimento
+      para cookies de publicidade ou análise, podendo ser utilizadas para
+      funções estritamente necessárias ao funcionamento, segurança e entrega do
+      conteúdo.
+    </p>
 
-  <h2>2.1. Alteração das preferências</h2>
+    <h2>4. Informações coletadas</h2>
 
-  <p>
-    O visitante poderá alterar suas preferências de cookies e serviços de
-    terceiros por meio do painel de privacidade disponibilizado no site.
-  </p>
+    <p>
+      O BaixoNível não solicita, como regra geral, informações pessoais como
+      nome, endereço, telefone ou documentos para que o visitante possa acessar
+      o conteúdo do site.
+    </p>
 
-  <p>
-    Quando uma categoria que depende de consentimento for desativada, o
-    BaixoNível não carregará os scripts correspondentes, sempre que tecnicamente
-    possível.
-  </p>
+    <p>
+      Entretanto, os serviços de terceiros utilizados pelo site podem processar
+      informações técnicas e de utilização, tais como:
+    </p>
 
-  <p>
-    As preferências relacionadas ao Google AdSense possuem funcionamento
-    diferente: a desativação da publicidade personalizada não remove os
-    anúncios, mas faz com que sejam utilizados anúncios não personalizados,
-    conforme as configurações e políticas aplicáveis do Google.
-  </p>
+    <ul>
+      <li>endereço IP;</li>
+      <li>informações sobre o navegador e dispositivo utilizado;</li>
+      <li>páginas acessadas;</li>
+      <li>data e horário dos acessos;</li>
+      <li>informações sobre interações com o site;</li>
+      <li>identificadores e cookies;</li>
+      <li>
+        informações necessárias para exibição de anúncios ou funcionamento de
+        determinadas funcionalidades.
+      </li>
+    </ul>
 
-  <h2>3. Suas escolhas</h2>
+    <p>
+      A coleta e o tratamento dessas informações pelos respectivos serviços são
+      realizados de acordo com as políticas de privacidade de seus fornecedores.
+    </p>
 
-  <p>
-    O BaixoNível disponibiliza mecanismos para que o visitante possa escolher
-    quais categorias de cookies e tecnologias de terceiros deseja permitir.
-  </p>
+    <p>
+      O Google informa que seus produtos destinados a publishers podem utilizar
+      tecnologias como cookies, web beacons, endereços IP e outros
+      identificadores.
+    </p>
 
-  <p>
-    Quando uma categoria de cookies é recusada, o site procura impedir o uso dos
-    serviços correspondentes sempre que tecnicamente possível.
-  </p>
+    <h2>5. Compartilhamento com terceiros</h2>
 
-  <p>
-    A recusa de cookies relacionados à publicidade não significa necessariamente
-    que os anúncios deixarão de ser exibidos. O Google AdSense pode continuar
-    exibindo anúncios não personalizados, de acordo com as configurações
-    aplicadas ao serviço.
-  </p>
+    <p>
+      O BaixoNível não comercializa ou vende diretamente informações pessoais de
+      seus visitantes.
+    </p>
 
-  <p>
-    Da mesma forma, algumas tecnologias utilizadas pela infraestrutura
-    necessária para disponibilizar o site podem não depender de consentimento
-    para cookies de publicidade ou análise, podendo ser utilizadas para funções
-    estritamente necessárias ao funcionamento, segurança e entrega do conteúdo.
-  </p>
+    <p>
+      Entretanto, ao utilizar serviços de terceiros, determinadas informações
+      podem ser transmitidas diretamente ao respectivo fornecedor para que o
+      serviço possa funcionar.
+    </p>
 
-  <h2>4. Informações coletadas</h2>
+    <p>
+      Entre esses fornecedores estão o Google, responsável pelos serviços Google
+      Custom Search, Google Analytics e Google AdSense, e empresas responsáveis
+      pela hospedagem, entrega e proteção do site.
+    </p>
 
-  <p>
-    O BaixoNível não solicita, como regra geral, informações pessoais como nome,
-    endereço, telefone ou documentos para que o visitante possa acessar o
-    conteúdo do site.
-  </p>
+    <p>
+      Cada fornecedor possui suas próprias políticas e práticas de tratamento de
+      dados.
+    </p>
 
-  <p>
-    Entretanto, os serviços de terceiros utilizados pelo site podem processar
-    informações técnicas e de utilização, tais como:
-  </p>
+    <h2>6. Google</h2>
 
-  <ul>
-    <li>endereço IP;</li>
-    <li>informações sobre o navegador e dispositivo utilizado;</li>
-    <li>páginas acessadas;</li>
-    <li>data e horário dos acessos;</li>
-    <li>informações sobre interações com o site;</li>
-    <li>identificadores e cookies;</li>
-    <li>
-      informações necessárias para exibição de anúncios ou funcionamento de
-      determinadas funcionalidades.
-    </li>
-  </ul>
+    <p>
+      Os serviços do Google utilizados pelo BaixoNível possuem políticas
+      próprias relacionadas ao tratamento de dados e à utilização de cookies.
+    </p>
 
-  <p>
-    A coleta e o tratamento dessas informações pelos respectivos serviços são
-    realizados de acordo com as políticas de privacidade de seus fornecedores.
-  </p>
+    <p>
+      Para obter informações mais detalhadas sobre como o Google trata
+      informações provenientes de sites que utilizam seus serviços, consulte a
+      documentação e as políticas de privacidade disponibilizadas pelo próprio
+      Google.
+    </p>
 
-  <p>
-    O Google informa que seus produtos destinados a publishers podem utilizar
-    tecnologias como cookies, web beacons, endereços IP e outros
-    identificadores.
-  </p>
+    <p>
+      O Google também disponibiliza mecanismos para que os usuários possam
+      gerenciar determinadas preferências relacionadas à publicidade.
+    </p>
 
-  <h2>5. Compartilhamento com terceiros</h2>
+    <h2>7. Hospedagem e Cloudflare</h2>
 
-  <p>
-    O BaixoNível não comercializa ou vende diretamente informações pessoais de
-    seus visitantes.
-  </p>
+    <p>
+      O site pode utilizar serviços de hospedagem e, quando aplicável, serviços
+      da Cloudflare para entrega, segurança e proteção contra tráfego malicioso.
+    </p>
 
-  <p>
-    Entretanto, ao utilizar serviços de terceiros, determinadas informações
-    podem ser transmitidas diretamente ao respectivo fornecedor para que o
-    serviço possa funcionar.
-  </p>
+    <p>
+      Esses serviços podem processar informações técnicas necessárias para
+      entregar o conteúdo ao navegador do visitante e proteger a infraestrutura.
+    </p>
 
-  <p>
-    Entre esses fornecedores estão o Google, responsável pelos serviços Google
-    Custom Search, Google Analytics e Google AdSense, e empresas responsáveis
-    pela hospedagem, entrega e proteção do site.
-  </p>
+    <p>
+      A utilização desses serviços pode resultar no processamento de informações
+      técnicas, como endereço IP, informações do dispositivo, navegador e dados
+      relacionados às requisições realizadas ao site.
+    </p>
 
-  <p>
-    Cada fornecedor possui suas próprias políticas e práticas de tratamento de
-    dados.
-  </p>
+    <h2>8. Segurança</h2>
 
-  <h2>6. Google</h2>
+    <p>
+      Por ser um site predominantemente estático, o BaixoNível não mantém uma
+      infraestrutura própria de banco de dados destinada ao armazenamento das
+      informações dos visitantes.
+    </p>
 
-  <p>
-    Os serviços do Google utilizados pelo BaixoNível possuem políticas próprias
-    relacionadas ao tratamento de dados e à utilização de cookies.
-  </p>
+    <p>
+      Ainda assim, nenhuma transmissão ou armazenamento de informações na
+      internet pode ser considerado absolutamente seguro. São adotadas medidas
+      razoáveis para reduzir riscos relacionados ao acesso e à utilização do
+      site.
+    </p>
 
-  <p>
-    Para obter informações mais detalhadas sobre como o Google trata informações
-    provenientes de sites que utilizam seus serviços, consulte a documentação e
-    as políticas de privacidade disponibilizadas pelo próprio Google.
-  </p>
+    <h2>9. Direitos do visitante</h2>
 
-  <p>
-    O Google também disponibiliza mecanismos para que os usuários possam
-    gerenciar determinadas preferências relacionadas à publicidade.
-  </p>
+    <p>
+      Nos termos da legislação aplicável, especialmente da Lei Geral de Proteção
+      de Dados Pessoais (LGPD), o visitante pode possuir direitos relacionados
+      ao tratamento de seus dados pessoais.
+    </p>
 
-  <h2>7. Hospedagem e Cloudflare</h2>
+    <p>
+      Como grande parte do processamento descrito nesta política é realizado
+      diretamente por serviços de terceiros, determinadas solicitações poderão
+      precisar ser encaminhadas ao respectivo fornecedor responsável pelo
+      tratamento dos dados.
+    </p>
 
-  <p>
-    O site pode utilizar serviços de hospedagem e, quando aplicável, serviços da
-    Cloudflare para entrega, segurança e proteção contra tráfego malicioso.
-  </p>
+    <h2>10. Alterações nesta política</h2>
 
-  <p>
-    Esses serviços podem processar informações técnicas necessárias para
-    entregar o conteúdo ao navegador do visitante e proteger a infraestrutura.
-  </p>
+    <p>
+      Esta Política de Privacidade poderá ser atualizada para refletir
+      alterações nos serviços utilizados pelo BaixoNível, nas tecnologias
+      empregadas ou nas exigências legais aplicáveis.
+    </p>
 
-  <p>
-    A utilização desses serviços pode resultar no processamento de informações
-    técnicas, como endereço IP, informações do dispositivo, navegador e dados
-    relacionados às requisições realizadas ao site.
-  </p>
+    <p>
+      Quando houver alterações relevantes, a versão atualizada será
+      disponibilizada nesta página.
+    </p>
 
-  <h2>8. Segurança</h2>
+    <h2>11. Contato</h2>
 
-  <p>
-    Por ser um site predominantemente estático, o BaixoNível não mantém uma
-    infraestrutura própria de banco de dados destinada ao armazenamento das
-    informações dos visitantes.
-  </p>
-
-  <p>
-    Ainda assim, nenhuma transmissão ou armazenamento de informações na internet
-    pode ser considerado absolutamente seguro. São adotadas medidas razoáveis
-    para reduzir riscos relacionados ao acesso e à utilização do site.
-  </p>
-
-  <h2>9. Direitos do visitante</h2>
-
-  <p>
-    Nos termos da legislação aplicável, especialmente da Lei Geral de Proteção
-    de Dados Pessoais (LGPD), o visitante pode possuir direitos relacionados ao
-    tratamento de seus dados pessoais.
-  </p>
-
-  <p>
-    Como grande parte do processamento descrito nesta política é realizado
-    diretamente por serviços de terceiros, determinadas solicitações poderão
-    precisar ser encaminhadas ao respectivo fornecedor responsável pelo
-    tratamento dos dados.
-  </p>
-
-  <h2>10. Alterações nesta política</h2>
-
-  <p>
-    Esta Política de Privacidade poderá ser atualizada para refletir alterações
-    nos serviços utilizados pelo BaixoNível, nas tecnologias empregadas ou nas
-    exigências legais aplicáveis.
-  </p>
-
-  <p>
-    Quando houver alterações relevantes, a versão atualizada será
-    disponibilizada nesta página.
-  </p>
-
-  <h2>11. Contato</h2>
-
-  <p>
-    Caso tenha dúvidas sobre esta Política de Privacidade ou sobre o tratamento
-    de dados realizado pelo BaixoNível, entre em contato por meio do canal de
-    contato disponibilizado no site.
-  </p>
+    <p>
+      Caso tenha dúvidas sobre esta Política de Privacidade ou sobre o
+      tratamento de dados realizado pelo BaixoNível, entre em contato por meio
+      do canal de contato disponibilizado no site.
+    </p>
+  </article>
 </Scaffold>

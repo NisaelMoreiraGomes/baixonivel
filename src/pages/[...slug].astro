@@ -1,0 +1,87 @@
+---
+import "../styles/content.css";
+
+import { getSortedPosts } from "../libs/posts";
+
+import { type CollectionEntry, render } from "astro:content";
+import type { Thumb } from "../types/thumb.type";
+import FormattedDate from "../components/FormattedDate.astro";
+import Scaffold from "../layout/Scaffold.astro";
+import ContentHead from "../components/ContentHead.astro";
+import Giscus from "../components/Giscus.astro";
+
+export async function getStaticPaths() {
+  const posts = await getSortedPosts();
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: post,
+  }));
+}
+type Props = CollectionEntry<"blog">;
+
+const post = Astro.props;
+
+const thumb: Thumb | undefined = post.data.heroImage
+  ? {
+      resource: post.data.heroImage,
+      description: post.data.heroAlt ?? "Imagem de capa do post.",
+    }
+  : undefined;
+
+const { Content } = await render(post);
+---
+
+<Scaffold>
+  <ContentHead
+    slot="head"
+    title={"BaixoNível: " + post.data.title}
+    description={post.data.description}
+    thumb={thumb}
+  />
+
+  <article>
+    <header>
+      <h1>{post.data.title}</h1>
+      <p>
+        <FormattedDate date={post.data.pubDate} />
+      </p>
+
+      {
+        thumb && (
+          <figure class="cover">
+            <img src={thumb.resource.src} alt={thumb.description} />
+          </figure>
+        )
+      }
+    </header>
+
+    <Content />
+
+    <footer>
+      <hr />
+      Tags: {
+        post.data.tags.map((tag) => (
+          <a href={new URL(tag, Astro.site)}>#{tag}</a>
+        ))
+      }
+    </footer>
+  </article>
+
+  <Giscus />
+</Scaffold>
+
+<style>
+  footer a {
+    text-decoration: underline;
+    margin: 5px;
+  }
+
+  hr {
+    border-style: dashed;
+    border-color: var(--text-color);
+  }
+
+  article {
+    margin-bottom: 20px;
+  }
+</style>

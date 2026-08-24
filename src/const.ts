@@ -1,13 +1,4 @@
-export interface Link {
-  readonly page: string;
-  readonly content: string;
-  readonly title: string;
-  readonly description: string;
-  readonly link_description: string;
-  readonly thumb?: {
-    readonly description: string;
-  };
-}
+import type { Link } from "./types/link.type";
 
 export const SITE_CONFIG = {
   name: "BaixoNível",

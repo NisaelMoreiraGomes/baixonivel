@@ -4,51 +4,43 @@ import { SITE_CONFIG } from "../const";
 import { HOME_PAGE } from "../const";
 import { ORGANIZATIONAL_PAGES } from "../const";
 
-import MenuBurguer from "./MenuBurguer.astro";
-import Search from "./Search.astro";
-
 const pathname = Astro.url.pathname;
 ---
 
-<nav>
-  <div class="navbar bg-blur">
-    <div class="start">
-      <button
-        class="openBurguer"
-        title="Abra a gaveta para ver as categorias e muito mais.">≡</button
-      >
-      <a
-        class:list={{ activated: pathname === HOME_PAGE.page }}
-        class="logo"
-        href={HOME_PAGE.page}
-        title={HOME_PAGE.link_description}>{SITE_CONFIG.name}</a
-      >
-    </div>
-    <div class="end">
-      {
-        ORGANIZATIONAL_PAGES.map((link) => (
-          <a
-            href={link.page}
-            title={link.link_description}
-            class:list={{
-              activated: pathname.startsWith(link.page),
-            }}
-          >
-            {link.content}
-          </a>
-        ))
-      }
-
-      <button
-        class="openSearch disable"
-        title="Busca personalizada pelo mecanismo do Google.">🔎</button
-      >
-    </div>
+<div class="navbar bg-blur">
+  <div class="start">
+    <button
+      class="openBurguer"
+      title="Abra a gaveta para ver as categorias e muito mais.">≡</button
+    >
+    <a
+      class:list={{ activated: pathname === HOME_PAGE.page }}
+      class="logo"
+      href={HOME_PAGE.page}
+      title={HOME_PAGE.link_description}>{SITE_CONFIG.name}</a
+    >
   </div>
+  <div class="end">
+    {
+      ORGANIZATIONAL_PAGES.map((link) => (
+        <a
+          href={link.page}
+          title={link.link_description}
+          class:list={{
+            activated: pathname.startsWith(link.page),
+          }}
+        >
+          {link.content}
+        </a>
+      ))
+    }
 
-  <MenuBurguer />
-  <Search />
-</nav>
+    <button
+      class="openSearch disable"
+      title="Busca personalizada pelo mecanismo do Google.">🔎</button
+    >
+  </div>
+</div>
 
 <script>
   import Cookies from "../scripts/cookies";
@@ -82,10 +74,6 @@ const pathname = Astro.url.pathname;
 </script>
 
 <style>
-  nav {
-    margin-bottom: var(--nav-bar-size);
-  }
-
   button {
     background: none;
     border: none;
@@ -107,7 +95,6 @@ const pathname = Astro.url.pathname;
 
   a:hover,
   button:hover {
-    color: var(--secundary-color);
     border-bottom: 2px dotted var(--secundary-color);
   }
 
@@ -133,7 +120,7 @@ const pathname = Astro.url.pathname;
   }
 
   .activated {
-    border-color: var(--secundary-color);
+    border-color: var(--secundary-color) !important;
   }
   .activated:hover {
     color: var(--accent-color);

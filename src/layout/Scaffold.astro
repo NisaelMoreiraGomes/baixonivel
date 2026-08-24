@@ -4,6 +4,8 @@ import { SITE_CONFIG } from "../const";
 import "../styles/global.css";
 
 import Nav from "../components/Nav.astro";
+import MenuBurguer from "../components/MenuBurguer.astro";
+import Search from "../components/Search.astro";
 import FullBg from "../components/FullBg.astro";
 import CookieCard from "../components/CookieCard.astro";
 import Footer from "../components/Footer.astro";
@@ -30,7 +32,11 @@ import Footer from "../components/Footer.astro";
 
   <body>
     <header>
-      <Nav />
+      <nav>
+        <Nav />
+        <MenuBurguer />
+        <Search />
+      </nav>
     </header>
 
     <FullBg />

@@ -1,0 +1,18 @@
+article img {
+  max-width: 800px;
+}
+
+article header h1,
+article header p,
+article header figure {
+  padding: 0px !important;
+  margin: 0px !important;
+}
+
+article header h1 {
+  margin-bottom: 10px !important;
+}
+
+article header p {
+  margin-bottom: 20px !important;
+}

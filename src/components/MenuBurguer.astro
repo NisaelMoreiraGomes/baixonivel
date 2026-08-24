@@ -1,14 +1,22 @@
 ---
+import { ORGANIZATIONAL_PAGES } from "../const";
+
 import Logo from "../../public/favicon.svg";
-import type { Link } from "../const";
+import type { Link } from "../types/link.type";
+import { getCategories } from "../libs/posts";
 
 interface Props {
   links?: Link[];
 }
 
-const { links = [] } = Astro.props;
-
-import { ORGANIZATIONAL_PAGES } from "../const";
+const categories = (await getCategories()).map(
+  (category) =>
+    ({
+      page: new URL("categorias/" + category.toLowerCase(), Astro.site).href,
+      content: category,
+      link_description: "Todos os posts da categoria " + category + ".",
+    }) as Link,
+);
 ---
 
 <div class="menu-burguer hidden bg-blur">
@@ -17,7 +25,7 @@ import { ORGANIZATIONAL_PAGES } from "../const";
   </div>
   <div>
     {
-      links.map((link) => (
+      categories.map((link) => (
         <a href={link.page} title={link.link_description}>
           {link.content}
         </a>
@@ -89,6 +97,7 @@ import { ORGANIZATIONAL_PAGES } from "../const";
 
   a:hover {
     background: color-mix(in srgb, var(--secundary-color) 70%, transparent);
+    color: var(--text-color);
   }
 
   .about-links {
