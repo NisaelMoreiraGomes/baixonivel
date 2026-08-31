@@ -43,8 +43,10 @@ const { Content } = await render(post);
   <article>
     <header>
       <h1>{post.data.title}</h1>
-      Autor: <address>Nisael Moreira Gomes</address>
-      <FormattedDate date={post.data.pubDate} />
+      <p>
+        Author: {post.data.author}
+        <FormattedDate date={post.data.pubDate} />
+      </p>
 
       {thumb && <img src={thumb.resource.src} alt={thumb.description} />}
     </header>
@@ -61,7 +63,8 @@ const { Content } = await render(post);
 </Scaffold>
 
 <style>
-  footer span, footer a {
+  footer span,
+  footer a {
     margin: 5px;
     display: inline-block;
   }
@@ -73,5 +76,11 @@ const { Content } = await render(post);
 
   article {
     margin-bottom: 20px;
+  }
+
+  header p {
+    display: flex;
+    justify-content: space-between;
+    margin: 0px;
   }
 </style>

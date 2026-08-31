@@ -1,11 +1,5 @@
-article header h1,
-article header p,
-article header h1 {
-  margin-bottom: 10px !important;
-}
-
-article header p {
-  margin-bottom: 20px !important;
+article h1 {
+  margin: 10px 0px;
 }
 
 article a {
