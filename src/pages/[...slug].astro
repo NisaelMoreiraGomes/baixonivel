@@ -9,6 +9,7 @@ import FormattedDate from "../components/FormattedDate.astro";
 import Scaffold from "../layout/Scaffold.astro";
 import ContentHead from "../components/ContentHead.astro";
 import Giscus from "../components/Giscus.astro";
+import slug from "../libs/utils/slug";
 
 export async function getStaticPaths() {
   const posts = await getSortedPosts();
@@ -42,28 +43,17 @@ const { Content } = await render(post);
   <article>
     <header>
       <h1>{post.data.title}</h1>
-      <p>
-        <FormattedDate date={post.data.pubDate} />
-      </p>
+      Autor: <address>Nisael Moreira Gomes</address>
+      <FormattedDate date={post.data.pubDate} />
 
-      {
-        thumb && (
-          <figure class="cover">
-            <img src={thumb.resource.src} alt={thumb.description} />
-          </figure>
-        )
-      }
+      {thumb && <img src={thumb.resource.src} alt={thumb.description} />}
     </header>
 
     <Content />
 
     <footer>
       <hr />
-      Tags: {
-        post.data.tags.map((tag) => (
-          <a href={new URL(tag, Astro.site)}>#{tag}</a>
-        ))
-      }
+      Tags: {post.data.tags.map((tag) => <span>#{slug(tag)}</span>)}
     </footer>
   </article>
 
@@ -71,9 +61,9 @@ const { Content } = await render(post);
 </Scaffold>
 
 <style>
-  footer a {
-    text-decoration: underline;
+  footer span, footer a {
     margin: 5px;
+    display: inline-block;
   }
 
   hr {
