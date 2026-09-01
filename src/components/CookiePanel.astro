@@ -1,65 +1,74 @@
 <div
-    class="cookies-panel"
-    data-version={import.meta.env.EXPECTED_COOKIE_VERSION}
+  class="cookies-panel"
+  data-version={import.meta.env.EXPECTED_COOKIE_VERSION}
 >
-    <label>
-        <input type="checkbox" id="acS" />
-        Google Search - Permite carregar a busca do Google dentro do site.</label
-    >
-    <label>
-        <input type="checkbox" name="" id="acA" />
-        Google Analytics - Permite que o site colete estatísticas sobre sua utilização.
-    </label>
-    <label>
-        <input type="checkbox" name="" id="acAds" />Publicidade personalizada -
-        Permite que o Google personalize os anúncios exibidos com base em
-        interesses e atividades relacionadas à navegação.</label
-    >
+  <label>
+    <input type="checkbox" id="acG" /> Giscus - Permite carregar o sistema de comentários
+    e reações.
+  </label>
+
+  <label>
+    <input type="checkbox" id="acS" /> Google Search - Permite carregar a busca do
+    Google dentro do site.
+  </label>
+
+  <label>
+    <input type="checkbox" id="acA" /> Google Analytics - Permite carregar o sistema
+    de coleta de estatísticas sobre sua utilização.
+  </label>
+
+  <label>
+    <input type="checkbox" id="acAds" /> Google Adsense - Permite carregar o sistema
+    de anúncios publicitarios.
+  </label>
 </div>
 
 <script>
-    import Cookies from "../scripts/cookies";
+  import Cookies from "../scripts/cookies";
 
-    const cookiesPanel = document.querySelector(
-        ".cookies-panel",
-    ) as HTMLDivElement;
+  const cookiesPanel = document.querySelector(
+    ".cookies-panel",
+  ) as HTMLDivElement;
 
-    const inputSearch = document.querySelector("#acS") as HTMLInputElement;
-    const inputAnalytics = document.querySelector("#acA") as HTMLInputElement;
-    const inputAds = document.querySelector("#acAds") as HTMLInputElement;
+  const giscusInput = document.querySelector("#acG") as HTMLInputElement;
+  const searchInput = document.querySelector("#acS") as HTMLInputElement;
+  const analitycsInput = document.querySelector("#acA") as HTMLInputElement;
+  const adsInput = document.querySelector("#acAds") as HTMLInputElement;
 
-    const cookies = new Cookies(cookiesPanel?.dataset.version ?? "1.0");
+  const cookies = new Cookies(cookiesPanel?.dataset.version ?? "1.0");
 
-    function load_inputs_state() {
-        const { ads, analitycs, search } = cookies.get_status();
+  function load_inputs_state() {
+    const { ads, analitycs, giscus, search } = cookies.get_status();
 
-        inputAds.checked = ads;
-        inputAnalytics.checked = analitycs;
-        inputSearch.checked = search;
-    }
+    adsInput.checked = ads;
+    analitycsInput.checked = analitycs;
+    giscusInput.checked = giscus;
+    searchInput.checked = search;
+  }
 
-    [inputAds, inputAnalytics, inputSearch].forEach((input) => {
-        input.addEventListener("change", () => {
-            cookies.set_and_emit_status({
-                ads: inputAds.checked,
-                analitycs: inputAnalytics.checked,
-                search: inputSearch.checked,
-            });
-        });
+  [adsInput, analitycsInput, giscusInput, searchInput].forEach((input) => {
+    input.addEventListener("change", () => {
+      cookies.set_and_emit_status({
+        ads: adsInput.checked,
+        analitycs: analitycsInput.checked,
+        giscus: giscusInput.checked,
+        search: searchInput.checked,
+      });
     });
+  });
 
-    load_inputs_state();
+  load_inputs_state();
 </script>
 
 <style>
-    .cookies-panel {
-        border: 2px solid var(--text-color);
-        border-radius: 10px;
-        padding: 10px;
-    }
+  .cookies-panel {
+    border: 2px solid var(--text-color);
+    border-radius: 10px;
+    padding: 10px;
+  }
 
-    label {
-        display: block;
-        padding: 5px;
-    }
+  label {
+    display: block;
+    padding: 5px;
+  }
 </style>

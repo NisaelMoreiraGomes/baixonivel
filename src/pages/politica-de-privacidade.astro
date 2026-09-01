@@ -1,13 +1,10 @@
 ---
 import "../styles/content.css";
-
 import { ORGANIZATIONAL_PAGES } from "../const";
-
 import Scaffold from "../layout/Scaffold.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import ContentHead from "../components/ContentHead.astro";
 import CookiePanel from "../components/CookiePanel.astro";
-
 const PAGE = ORGANIZATIONAL_PAGES[2];
 ---
 
@@ -18,11 +15,9 @@ const PAGE = ORGANIZATIONAL_PAGES[2];
     title={PAGE.title}
     description={PAGE.description}
   />
-
   <article>
     <header>
       <h1>Política de Privacidade</h1>
-
       <p><FormattedDate date={new Date("2026-08-18")} /></p>
     </header>
 
@@ -34,10 +29,10 @@ const PAGE = ORGANIZATIONAL_PAGES[2];
     </p>
 
     <p>
-      Para disponibilizar determinadas funcionalidades, medir o acesso ao site e
-      manter sua operação, o BaixoNível utiliza serviços fornecidos por
-      terceiros, que podem coletar ou processar determinadas informações de
-      acordo com suas próprias políticas de privacidade.
+      Para disponibilizar determinadas funcionalidades, medir o acesso ao site,
+      permitir comentários e manter sua operação, o BaixoNível utiliza serviços
+      fornecidos por terceiros, que podem coletar ou processar determinadas
+      informações de acordo com suas próprias políticas de privacidade.
     </p>
 
     <h2>1. Serviços utilizados</h2>
@@ -55,7 +50,13 @@ const PAGE = ORGANIZATIONAL_PAGES[2];
       </li>
       <li>
         Google AdSense — utilizado para exibir anúncios e contribuir para a
-        manutenção do site.
+        manutenção do site. O serviço somente será carregado e executado caso o
+        visitante autorize a respectiva categoria de publicidade.
+      </li>
+      <li>
+        Giscus — utilizado para disponibilizar o sistema de comentários do site.
+        O serviço utiliza a infraestrutura do GitHub para autenticação e
+        gerenciamento das discussões relacionadas aos comentários.
       </li>
       <li>
         Serviços de hospedagem e infraestrutura, incluindo eventualmente
@@ -90,6 +91,12 @@ const PAGE = ORGANIZATIONAL_PAGES[2];
     </p>
 
     <CookiePanel />
+
+    <p>
+      A regra adotada pelo BaixoNível é de que os serviços que dependem de
+      consentimento somente serão carregados ou executados quando a respectiva
+      categoria tiver sido autorizada pelo visitante.
+    </p>
 
     <p>
       As preferências selecionadas pelo visitante são aplicadas da seguinte
@@ -130,23 +137,44 @@ const PAGE = ORGANIZATIONAL_PAGES[2];
     </p>
 
     <p>
-      Caso o visitante autorize a utilização de publicidade personalizada, o
-      Google poderá utilizar informações e identificadores, incluindo cookies e
-      tecnologias semelhantes, para selecionar anúncios de acordo com interesses
-      e atividades relacionadas à navegação.
+      O BaixoNível adota uma política de consentimento explícito para a
+      utilização do Google AdSense. O serviço somente será carregado, executado
+      ou utilizado quando o visitante autorizar a categoria correspondente à
+      publicidade.
     </p>
 
     <p>
-      Caso o visitante não autorize a publicidade personalizada, os anúncios
-      continuarão podendo ser exibidos, porém serão utilizados anúncios não
-      personalizados. Nesse caso, a seleção dos anúncios é realizada
-      principalmente com base no contexto da página e em outras informações que
-      não dependem do histórico de navegação ou dos interesses do usuário.
+      Caso o visitante não autorize a utilização da publicidade, os scripts e
+      recursos do Google AdSense não serão carregados ou executados, e os
+      anúncios fornecidos pelo Google AdSense não serão exibidos durante aquela
+      navegação.
     </p>
 
     <p>
-      A desativação da publicidade personalizada, portanto, não significa que os
-      anúncios deixarão de ser exibidos.
+      A recusa da categoria de publicidade, portanto, impede a utilização do
+      Google AdSense pelo site enquanto essa preferência permanecer desativada.
+    </p>
+
+    <h3>Giscus</h3>
+
+    <p>
+      O Giscus é utilizado para disponibilizar comentários nas páginas do
+      BaixoNível. O serviço utiliza o GitHub para autenticação dos usuários e
+      para armazenar e gerenciar as discussões utilizadas como comentários.
+    </p>
+
+    <p>
+      Para utilizar o sistema de comentários, o visitante poderá ser direcionado
+      a serviços do GitHub e poderá precisar realizar autenticação em sua conta.
+      Nesse processo, informações relacionadas à utilização desses serviços
+      poderão ser processadas pelo Giscus e pelo GitHub, de acordo com suas
+      respectivas políticas e configurações.
+    </p>
+
+    <p>
+      Caso o visitante não autorize a categoria correspondente aos comentários,
+      os recursos necessários para carregar o Giscus não serão carregados e o
+      sistema de comentários ficará indisponível durante aquela navegação.
     </p>
 
     <h3>Cookies necessários</h3>
@@ -172,15 +200,21 @@ const PAGE = ORGANIZATIONAL_PAGES[2];
 
     <p>
       Quando uma categoria que depende de consentimento for desativada, o
-      BaixoNível não carregará os scripts correspondentes, sempre que
-      tecnicamente possível.
+      BaixoNível não carregará ou executará os scripts correspondentes, sempre
+      que tecnicamente possível.
     </p>
 
     <p>
-      As preferências relacionadas ao Google AdSense possuem funcionamento
-      diferente: a desativação da publicidade personalizada não remove os
-      anúncios, mas faz com que sejam utilizados anúncios não personalizados,
-      conforme as configurações e políticas aplicáveis do Google.
+      No caso do Google AdSense, a desativação da categoria de publicidade
+      impede o carregamento e a execução do serviço. Consequentemente, nenhum
+      anúncio fornecido pelo Google AdSense será exibido enquanto essa categoria
+      permanecer desativada.
+    </p>
+
+    <p>
+      Da mesma forma, quando a categoria correspondente aos comentários estiver
+      desativada, o Giscus não será carregado e a funcionalidade de comentários
+      ficará indisponível durante aquela navegação.
     </p>
 
     <h2>3. Suas escolhas</h2>
@@ -191,23 +225,29 @@ const PAGE = ORGANIZATIONAL_PAGES[2];
     </p>
 
     <p>
-      Quando uma categoria de cookies é recusada, o site procura impedir o uso
-      dos serviços correspondentes sempre que tecnicamente possível.
+      A regra geral adotada pelo site é que, quando uma categoria que depende de
+      consentimento é recusada, os serviços correspondentes não serão carregados
+      ou executados, sempre que tecnicamente possível.
     </p>
 
     <p>
-      A recusa de cookies relacionados à publicidade não significa
-      necessariamente que os anúncios deixarão de ser exibidos. O Google AdSense
-      pode continuar exibindo anúncios não personalizados, de acordo com as
-      configurações aplicadas ao serviço.
+      No caso específico da publicidade, a recusa da categoria impede a
+      utilização do Google AdSense. Portanto, enquanto a publicidade não estiver
+      autorizada, os scripts do Google AdSense não serão carregados ou
+      executados e os anúncios do serviço não serão exibidos.
     </p>
 
     <p>
-      Da mesma forma, algumas tecnologias utilizadas pela infraestrutura
-      necessária para disponibilizar o site podem não depender de consentimento
-      para cookies de publicidade ou análise, podendo ser utilizadas para
-      funções estritamente necessárias ao funcionamento, segurança e entrega do
-      conteúdo.
+      Da mesma forma, a recusa da categoria relacionada aos comentários impede o
+      carregamento do Giscus e, consequentemente, a utilização do sistema de
+      comentários durante aquela navegação.
+    </p>
+
+    <p>
+      Algumas tecnologias utilizadas pela infraestrutura necessária para
+      disponibilizar o site podem não depender de consentimento para cookies de
+      publicidade ou análise, podendo ser utilizadas para funções estritamente
+      necessárias ao funcionamento, segurança e entrega do conteúdo.
     </p>
 
     <h2>4. Informações coletadas</h2>
@@ -232,7 +272,11 @@ const PAGE = ORGANIZATIONAL_PAGES[2];
       <li>identificadores e cookies;</li>
       <li>
         informações necessárias para exibição de anúncios ou funcionamento de
-        determinadas funcionalidades.
+        determinadas funcionalidades;
+      </li>
+      <li>
+        informações relacionadas à autenticação e utilização do sistema de
+        comentários, quando o Giscus for utilizado.
       </li>
     </ul>
 
@@ -245,6 +289,12 @@ const PAGE = ORGANIZATIONAL_PAGES[2];
       O Google informa que seus produtos destinados a publishers podem utilizar
       tecnologias como cookies, web beacons, endereços IP e outros
       identificadores.
+    </p>
+
+    <p>
+      No caso do Giscus, informações relacionadas à utilização do sistema de
+      comentários e à autenticação poderão ser processadas pelo Giscus e pelo
+      GitHub, conforme as políticas e configurações desses serviços.
     </p>
 
     <h2>5. Compartilhamento com terceiros</h2>
@@ -262,8 +312,9 @@ const PAGE = ORGANIZATIONAL_PAGES[2];
 
     <p>
       Entre esses fornecedores estão o Google, responsável pelos serviços Google
-      Custom Search, Google Analytics e Google AdSense, e empresas responsáveis
-      pela hospedagem, entrega e proteção do site.
+      Custom Search, Google Analytics e Google AdSense; o Giscus e o GitHub,
+      relacionados ao sistema de comentários; e empresas responsáveis pela
+      hospedagem, entrega e proteção do site.
     </p>
 
     <p>
@@ -290,7 +341,28 @@ const PAGE = ORGANIZATIONAL_PAGES[2];
       gerenciar determinadas preferências relacionadas à publicidade.
     </p>
 
-    <h2>7. Hospedagem e Cloudflare</h2>
+    <h2>7. Giscus e GitHub</h2>
+
+    <p>
+      O BaixoNível utiliza o Giscus para disponibilizar o sistema de comentários
+      nas páginas que oferecem essa funcionalidade.
+    </p>
+
+    <p>
+      O Giscus utiliza discussões do GitHub como mecanismo para armazenar e
+      gerenciar os comentários. A utilização dessa funcionalidade pode envolver
+      comunicação com os servidores do Giscus e do GitHub e, quando houver
+      autenticação, com a conta do visitante nesses serviços.
+    </p>
+
+    <p>
+      O tratamento de informações realizado pelo Giscus e pelo GitHub está
+      sujeito às políticas de privacidade e aos termos de uso desses serviços. O
+      BaixoNível não controla diretamente as práticas de tratamento de dados
+      realizadas por essas empresas.
+    </p>
+
+    <h2>8. Hospedagem e Cloudflare</h2>
 
     <p>
       O site pode utilizar serviços de hospedagem e, quando aplicável, serviços
@@ -308,7 +380,7 @@ const PAGE = ORGANIZATIONAL_PAGES[2];
       relacionados às requisições realizadas ao site.
     </p>
 
-    <h2>8. Segurança</h2>
+    <h2>9. Segurança</h2>
 
     <p>
       Por ser um site predominantemente estático, o BaixoNível não mantém uma
@@ -323,7 +395,7 @@ const PAGE = ORGANIZATIONAL_PAGES[2];
       site.
     </p>
 
-    <h2>9. Direitos do visitante</h2>
+    <h2>10. Direitos do visitante</h2>
 
     <p>
       Nos termos da legislação aplicável, especialmente da Lei Geral de Proteção
@@ -338,7 +410,7 @@ const PAGE = ORGANIZATIONAL_PAGES[2];
       tratamento dos dados.
     </p>
 
-    <h2>10. Alterações nesta política</h2>
+    <h2>11. Alterações nesta política</h2>
 
     <p>
       Esta Política de Privacidade poderá ser atualizada para refletir
@@ -351,7 +423,7 @@ const PAGE = ORGANIZATIONAL_PAGES[2];
       disponibilizada nesta página.
     </p>
 
-    <h2>11. Contato</h2>
+    <h2>12. Contato</h2>
 
     <p>
       Caso tenha dúvidas sobre esta Política de Privacidade ou sobre o

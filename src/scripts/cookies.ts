@@ -4,9 +4,11 @@ const searchCookiePermittedEventName = "searchCookiePermitted";
 const searchCookieDeniedEventName = "searchCookieDenied";
 const analyticsCookieEventName = "analyticsCookiePermitted";
 const adsCookieEventName = "adsCookiePermitted";
+const giscusCookieEventName = "giscusCookiePermitted";
 
 const adsCookieStorage = "accept-ads-cookies";
 const analitycsCookieStorage = "accept-analitycs-cookies";
+const gisucsCookieStorage = "accept-giscus-cookies";
 const searchCookieStorage = "accept-search-cookies";
 const hiddenCardCookieStorage = "cookies-version";
 
@@ -15,6 +17,7 @@ const stringAccept = (value: boolean) => (value ? "y" : "n");
 type CookiesStatus = {
   ads: boolean;
   analitycs: boolean;
+  giscus: boolean;
   search: boolean;
 };
 
@@ -22,6 +25,7 @@ export default class Cookies {
   private static emitted = {
     ads: false,
     analitycs: false,
+    giscus: false,
   };
 
   private expectedVersion: string;
@@ -44,6 +48,7 @@ export default class Cookies {
     return {
       ads: localStorage.getItem(adsCookieStorage) === "y",
       analitycs: localStorage.getItem(analitycsCookieStorage) === "y",
+      giscus: localStorage.getItem(gisucsCookieStorage) === "y",
       search: localStorage.getItem(searchCookieStorage) === "y",
     };
   }
@@ -59,6 +64,7 @@ export default class Cookies {
       analitycsCookieStorage,
       stringAccept(status.analitycs),
     );
+    localStorage.setItem(gisucsCookieStorage, stringAccept(status.giscus));
     localStorage.setItem(searchCookieStorage, stringAccept(status.search));
 
     this.set_hidden_card();
@@ -73,6 +79,11 @@ export default class Cookies {
     if (status.analitycs && !Cookies.emitted.analitycs) {
       Cookies.emitted.analitycs = true;
       eventEmmit(analyticsCookieEventName);
+    }
+
+    if (status.giscus && !Cookies.emitted.giscus) {
+      Cookies.emitted.giscus = true;
+      eventEmmit(giscusCookieEventName);
     }
 
     if (status.search) {
@@ -96,5 +107,9 @@ export default class Cookies {
 
   static onAdsPermitted(action: () => void) {
     eventListen(adsCookieEventName, action);
+  }
+
+  static onGiscusPermitted(action: () => void) {
+    eventListen(giscusCookieEventName, action);
   }
 }

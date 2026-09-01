@@ -3,139 +3,146 @@ import { ORGANIZATIONAL_PAGES } from "../const";
 ---
 
 <div
-    class="cookie hidden"
-    data-version={import.meta.env.EXPECTED_COOKIE_VERSION}
+  class="cookie hidden"
+  data-version={import.meta.env.EXPECTED_COOKIE_VERSION}
 >
-    <div class="cookie-card">
-        <span
-            >Esse site utiliza serviços de terceiros para algumas
-            funcionalidades. Você pode conferir nossa <a
-                href={ORGANIZATIONAL_PAGES[2].page}
-                title={ORGANIZATIONAL_PAGES[2].link_description}
-                >política de privacidade</a
-            > para mais informações. Deixe marcado caso você aceite permitir:</span
-        >
+  <div class="cookie-card">
+    <span
+      >Esse site utiliza serviços de terceiros para algumas funcionalidades.
+      Você pode conferir nossa <a
+        href={ORGANIZATIONAL_PAGES[2].page}
+        title={ORGANIZATIONAL_PAGES[2].link_description}
+        >política de privacidade</a
+      > para mais informações. Deixe marcado caso você aceite permitir:</span
+    >
 
-        <div>
-            <label>
-                <input type="checkbox" checked class="acS" /> Google Search - Permite
-                carregar a busca do Google dentro do site.
-            </label>
+    <div>
+      <label>
+        <input type="checkbox" checked class="acG" /> Giscus - Permite carregar o
+        sistema de comentários e reações.
+      </label>
 
-            <label>
-                <input type="checkbox" checked class="acA" /> Google Analytics - Permite
-                que o site colete estatísticas sobre sua utilização.
-            </label>
+      <label>
+        <input type="checkbox" checked class="acS" /> Google Search - Permite carregar
+        a busca do Google dentro do site.
+      </label>
 
-            <label>
-                <input type="checkbox" checked class="acAds" /> Publicidade personalizada
-                - Permite que o Google personalize os anúncios exibidos com base em
-                interesses e atividades relacionadas à navegação.
-            </label>
-            <label>
-                <button class="close-cookies">Salvar</button>
-            </label>
-        </div>
+      <label>
+        <input type="checkbox" checked class="acA" /> Google Analytics - Permite carregar
+        o sistema de coleta de estatísticas sobre sua utilização.
+      </label>
+
+      <label>
+        <input type="checkbox" checked class="acAds" /> Google Adsense - Permite carregar
+        o sistema de anúncios publicitarios.
+      </label>
+      <label>
+        <button class="close-cookies">Salvar</button>
+      </label>
     </div>
+  </div>
 </div>
 
 <script>
-    import { animation } from "../scripts/animation";
-    import Cookies from "../scripts/cookies";
-    import CookieCard from "../scripts/cookieCard";
+  import { animation } from "../scripts/animation";
+  import Cookies from "../scripts/cookies";
+  import CookieCard from "../scripts/cookieCard";
 
-    const cookiesCard = document.querySelector(".cookie") as HTMLDivElement;
-    const adsInput = document.querySelector(".acAds") as HTMLInputElement;
-    const analitycsInput = document.querySelector(".acA") as HTMLInputElement;
-    const searchInput = document.querySelector(".acS") as HTMLInputElement;
-    const closeCookies = document.querySelector(".close-cookies");
+  const cookiesCard = document.querySelector(".cookie") as HTMLDivElement;
+  const adsInput = document.querySelector(".acAds") as HTMLInputElement;
+  const analitycsInput = document.querySelector(".acA") as HTMLInputElement;
+  const giscusInput = document.querySelector(".acG") as HTMLInputElement;
+  const searchInput = document.querySelector(".acS") as HTMLInputElement;
+  const closeCookies = document.querySelector(".close-cookies");
 
-    const cookies = new Cookies(cookiesCard?.dataset.version ?? "1.0");
+  const cookies = new Cookies(cookiesCard?.dataset.version ?? "1.0");
 
-    function load_inputs_state() {
-        const { ads, analitycs, search } = cookies.get_status();
+  function load_inputs_state() {
+    const { ads, analitycs, giscus, search } = cookies.get_status();
 
-        adsInput.checked = ads;
-        analitycsInput.checked = analitycs;
-        searchInput.checked = search;
+    adsInput.checked = ads;
+    analitycsInput.checked = analitycs;
+    giscusInput.checked = giscus;
+    searchInput.checked = search;
+  }
+
+  CookieCard.onOpen((event) => {
+    if (event.detail.loadState) {
+      load_inputs_state();
     }
 
-    CookieCard.onOpen((event) => {
-        if (event.detail.loadState) {
-            load_inputs_state();
-        }
+    animation.start("appear-bottom", cookiesCard);
+  });
 
-        animation.start("appear-bottom", cookiesCard);
+  CookieCard.onClose(() => {
+    animation.end("desappear-bottom", cookiesCard);
+  });
+
+  closeCookies?.addEventListener("click", () => {
+    cookies.set_and_emit_status({
+      ads: adsInput.checked,
+      analitycs: analitycsInput.checked,
+      giscus: giscusInput.checked,
+      search: searchInput.checked,
     });
 
-    CookieCard.onClose(() => {
-        animation.end("desappear-bottom", cookiesCard);
-    });
+    CookieCard.close();
+  });
 
-    closeCookies?.addEventListener("click", () => {
-        cookies.set_and_emit_status({
-            ads: adsInput.checked,
-            analitycs: analitycsInput.checked,
-            search: searchInput.checked,
-        });
-
-        CookieCard.close();
-    });
-
-    if (!cookies.get_hidden_card()) {
-        CookieCard.open(false);
-    } else {
-        cookies.emit_status(cookies.get_status());
-    }
+  if (!cookies.get_hidden_card()) {
+    CookieCard.open(false);
+  } else {
+    cookies.emit_status(cookies.get_status());
+  }
 </script>
 
 <style>
-    .cookie {
-        width: 100vw;
-        position: fixed;
-        bottom: 40px;
-        left: 0px;
-        z-index: 3;
-        display: flex;
-        justify-content: center;
-    }
+  .cookie {
+    width: 100vw;
+    position: fixed;
+    bottom: 40px;
+    left: 0px;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+  }
+  .cookie-card {
+    padding: 15px;
+    width: 600px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    text-align: justify;
+    font-size: 0.9rem;
+    background: var(--bg-color);
+  }
+
+  label {
+    display: block;
+    padding: 5px 10px;
+  }
+
+  label:first-of-type,
+  label:last-of-type {
+    margin-top: 10px;
+  }
+
+  label:last-of-type {
+    text-align: center;
+  }
+
+  a {
+    text-decoration: underline;
+    transition: 0.3s color;
+  }
+
+  a:hover {
+    color: var(--secundary-color);
+  }
+
+  @media (max-width: 650px) {
     .cookie-card {
-        padding: 15px;
-        width: 600px;
-        border: 1px solid #555;
-        border-radius: 5px;
-        text-align: justify;
-        font-size: 0.9rem;
-        background: var(--bg-color);
+      width: 95vw;
+      box-sizing: border-box;
     }
-
-    label {
-        display: block;
-        padding: 5px 10px;
-    }
-
-    label:first-of-type,
-    label:last-of-type {
-        margin-top: 10px;
-    }
-
-    label:last-of-type {
-        text-align: center;
-    }
-
-    a {
-        text-decoration: underline;
-        transition: 0.3s color;
-    }
-
-    a:hover {
-        color: var(--secundary-color);
-    }
-
-    @media (max-width: 650px) {
-        .cookie-card {
-            width: 95vw;
-            box-sizing: border-box;
-        }
-    }
+  }
 </style>
